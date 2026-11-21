@@ -5,7 +5,7 @@
     </div>
     <div class="chat-compose-contact-body">
         <span class="chat-compose-contact-name">{{@user.name}}</span>
-        <span class="chat-compose-contact-subtitle">{{or @user.email @user.phone "Fleetbase user"}}</span>
+        <span class="chat-compose-contact-subtitle">{{or @user.email @user.phone (t "ember-ui.components.chat-tray.contact-row.fleetbase-user")}}</span>
     </div>
     <span class="chat-compose-contact-check">
         {{#if this.isSelected}}

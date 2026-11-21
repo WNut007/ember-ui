@@ -4,12 +4,12 @@
             @options={{this.exportOptions}}
             @selected={{this.format}}
             @onChange={{this.setFormat}}
-            @placeholder="Export format..."
+            @placeholder={{t "ember-ui.components.report-builder.export-options.export-format"}}
             @triggerClass="form-select form-input form-input-sm"
             as |option|
         >
             {{option.label}}
         </PowerSelect>
     </div>
-    <Button @text="Export" @icon="download" @size="sm" @type="default" @disabled={{@disabled}} @onClick={{this.export}} />
+    <Button @text={{t "ember-ui.components.report-builder.export-options.export"}} @icon="download" @size="sm" @type="default" @disabled={{@disabled}} @onClick={{this.export}} />
 </div>

@@ -69,4 +69,19 @@ module('Integration | Component | badge', function (hooks) {
 
         assert.dom('[data-test-block]').hasText('active!');
     });
+
+    test('a status with a translation shows the translated text, others are humanized', async function (assert) {
+        const intl = this.owner.lookup('service:intl');
+        intl.exists = (key) => key === 'ember-ui.status.in_transit';
+        intl.t = (key) => (key === 'ember-ui.status.in_transit' ? 'กำลังจัดส่ง' : key);
+
+        await render(hbs`<Badge @status="In Transit" />`);
+        assert.dom('.status-badge').hasText('กำลังจัดส่ง');
+
+        await render(hbs`<Badge @status="custom_value" />`);
+        assert.dom('.status-badge').hasText('Custom value');
+
+        await render(hbs`<Badge @text="in-transit" @status="active" />`);
+        assert.dom('.status-badge').hasText('กำลังจัดส่ง');
+    });
 });

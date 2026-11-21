@@ -1,21 +1,21 @@
 <div class="form-wrapper with-input-group-padding" ...attributes>
-    <InputGroup @name="Field Label" @value={{@resource.label}} {{on "input" this.setCustomFieldName}} />
-    <InputGroup @name="Field Description" @value={{@resource.description}} />
-    <InputGroup @name="Field Help Text" @value={{@resource.help_text}} />
+    <InputGroup @name={{t "ember-ui.components.custom-field.form.field-label"}} @value={{@resource.label}} {{on "input" this.setCustomFieldName}} />
+    <InputGroup @name={{t "ember-ui.components.custom-field.form.field-description"}} @value={{@resource.description}} />
+    <InputGroup @name={{t "ember-ui.components.custom-field.form.field-help-text"}} @value={{@resource.help_text}} />
     <InputGroup>
         <Toggle @isToggled={{@resource.required}} @onToggle={{fn (mut @resource.required)}}>
-            <span class="dark:text-gray-100 text-sm ml-2">Field is Required</span>
+            <span class="dark:text-gray-100 text-sm ml-2">{{t "ember-ui.components.custom-field.form.field-is-required"}}</span>
         </Toggle>
     </InputGroup>
     <InputGroup>
         <Toggle @isToggled={{@resource.editable}} @onToggle={{fn (mut @resource.editable)}}>
-            <span class="dark:text-gray-100 text-sm ml-2">Field is Editable</span>
+            <span class="dark:text-gray-100 text-sm ml-2">{{t "ember-ui.components.custom-field.form.field-is-editable"}}</span>
         </Toggle>
     </InputGroup>
-    <InputGroup @name="Field Type">
+    <InputGroup @name={{t "ember-ui.components.custom-field.form.field-type"}}>
         <select class="form-select w-full has--placeholder" {{on "change" this.onSelectCustomFieldType}}>
             <option selected disabled>
-                Select field type...
+                {{t "ember-ui.components.custom-field.form.select-field-type"}}
             </option>
             {{#each-in this.customFieldTypeMap as |key|}}
                 <option value={{dasherize key}} selected={{eq @resource.type (dasherize key)}}>
@@ -28,10 +28,10 @@
         <CustomField::OptionsInput @customField={{@resource}} @fieldMap={{this.currentFieldMap}} class="mb-4" />
     {{/if}}
     {{#if this.currentFieldMap.allowedModels}}
-        <InputGroup @name="Field Model Type">
+        <InputGroup @name={{t "ember-ui.components.custom-field.form.field-model-type"}}>
             <select class="form-select w-full has--placeholder" {{on "change" this.onSelectModelType}}>
                 <option selected disabled>
-                    Select model type
+                    {{t "ember-ui.components.custom-field.form.select-model-type"}}
                 </option>
                 {{#each this.currentFieldMap.allowedModels as |modelName|}}
                     <option value={{dasherize modelName}} selected={{eq @resource.meta.modelName (dasherize modelName)}}>
@@ -41,7 +41,7 @@
             </select>
         </InputGroup>
     {{/if}}
-    <InputGroup @name="Meta: Column-Span">
+    <InputGroup @name={{t "ember-ui.components.custom-field.form.meta-column-span"}}>
         <DropdownButton
             @text={{concat "Column Span Size :" (n-a @resource.meta.colSpan)}}
             @textClass="text-sm mr-2"

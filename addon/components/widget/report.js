@@ -14,6 +14,7 @@ import {
 } from '../../utils/report-widget-result';
 
 export default class WidgetReportComponent extends Component {
+    @service intl;
     @service store;
     @service modalsManager;
     @service notifications;
@@ -77,8 +78,8 @@ export default class WidgetReportComponent extends Component {
 
     @action selectReport() {
         this.modalsManager.show('modals/find-select-report', {
-            title: 'Select report',
-            acceptButtonText: 'Confirm',
+            title: this.intl.t('ember-ui.js.components.widget.report.select-report'),
+            acceptButtonText: this.intl.t('ember-ui.js.components.widget.report.confirm'),
             limit: 1,
             selected: this.selectedReports,
             onChange: ([selectedReport] = []) => {

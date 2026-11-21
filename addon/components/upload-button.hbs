@@ -13,14 +13,14 @@
             <Spinner class={{unless @hideButtonText "mr-2"}} />
             {{#unless @hideButtonText}}
                 <span>
-                    Uploading...
+                    {{t "ember-ui.components.upload-button.uploading"}}
                 </span>
             {{/unless}}
         {{else}}
             <FaIcon @icon={{or @icon "image"}} class="{{@iconClass}} {{unless @hideButtonText 'mr-2'}}" />
             {{#unless @hideButtonText}}
                 <span>
-                    {{or @buttonText "Upload new"}}
+                    {{or @buttonText (t "ember-ui.components.upload-button.upload-new")}}
                 </span>
             {{/unless}}
         {{/if}}

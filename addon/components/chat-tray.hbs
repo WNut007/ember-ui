@@ -2,7 +2,7 @@
     <button
         type="button"
         class="chat-tray-panel-trigger {{@triggerClass}} {{if (media 'isMobile') 'is-mobile'}}"
-        aria-label="Open chat inbox"
+        aria-label={{t "ember-ui.components.chat-tray.open-chat-inbox"}}
         aria-expanded={{if this.isInboxOpen "true" "false"}}
         {{on "click" this.toggleInbox}}
     >

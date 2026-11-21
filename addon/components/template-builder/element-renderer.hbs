@@ -21,17 +21,12 @@
     {{! IMAGE }}
     {{#if this.isImage}}
         {{#if this.imageSrc}}
-            <img
-                src={{this.imageSrc}}
-                alt={{this.imageAlt}}
-                style={{this.imageStyle}}
-                draggable="false"
-            />
+            <img src={{this.imageSrc}} alt={{this.imageAlt}} style={{this.imageStyle}} draggable="false" />
         {{else}}
             <div class="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-700 border border-dashed border-gray-300 dark:border-gray-600 rounded">
                 <div class="text-center text-gray-400 dark:text-gray-500 text-xs">
                     <FaIcon @icon="image" @size="lg" class="mb-1 block" />
-                    <span>Image</span>
+                    <span>{{t "ember-ui.components.template-builder.element-renderer.image"}}</span>
                 </div>
             </div>
         {{/if}}
@@ -84,7 +79,7 @@
                 {{else}}
                     <tbody>
                         <tr>
-                            <td class="border px-2 py-1 text-gray-400 text-center" colspan="1">No columns defined</td>
+                            <td class="border px-2 py-1 text-gray-400 text-center" colspan="1">{{t "ember-ui.components.template-builder.element-renderer.no-columns-defined"}}</td>
                         </tr>
                     </tbody>
                 {{/if}}

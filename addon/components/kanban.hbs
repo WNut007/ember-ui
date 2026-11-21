@@ -1,4 +1,10 @@
-<div class="kanban-board" role="application" {{set-height this.calculatedHeight calculated=true}} aria-label={{or @title "Kanban Board"}} {{on "keydown" this.onKeyDown}}>
+<div
+    class="kanban-board"
+    role="application"
+    {{set-height this.calculatedHeight calculated=true}}
+    aria-label={{or @title (t "ember-ui.components.kanban.kanban-board")}}
+    {{on "keydown" this.onKeyDown}}
+>
     {{#if @title}}
         <div class="kanban-board-header">
             <h1 class="kanban-board-title">{{@title}}</h1>

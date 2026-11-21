@@ -1,12 +1,14 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class ReportBuilderExportOptionsComponent extends Component {
+    @service intl;
     @tracked exportOptions = [
-        { value: 'csv', label: 'CSV' },
-        { value: 'xlsx', label: 'Excel (XLSX)' },
-        { value: 'json', label: 'JSON' },
+        { value: 'csv', label: this.intl.t('ember-ui.js.components.report-builder.export-options.csv') },
+        { value: 'xlsx', label: this.intl.t('ember-ui.js.components.report-builder.export-options.excel-xlsx') },
+        { value: 'json', label: this.intl.t('ember-ui.js.components.report-builder.export-options.json') },
     ];
 
     // PowerSelect is given whole option objects and renders `{{option.label}}`, so the default

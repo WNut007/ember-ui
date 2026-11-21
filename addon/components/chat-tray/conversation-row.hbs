@@ -3,12 +3,7 @@
         <div class="chat-inbox-conversation-avatars">
             {{#if this.hasVisibleParticipants}}
                 {{#each this.visibleParticipants as |participant|}}
-                    <Image
-                        src={{participant.avatar_url}}
-                        @fallbackSrc={{config "defaultValues.userImage"}}
-                        alt={{participant.name}}
-                        class="chat-inbox-conversation-avatar"
-                    />
+                    <Image src={{participant.avatar_url}} @fallbackSrc={{config "defaultValues.userImage"}} alt={{participant.name}} class="chat-inbox-conversation-avatar" />
                 {{/each}}
                 {{#if this.extraParticipantCount}}
                     <span class="chat-inbox-conversation-avatar chat-inbox-conversation-avatar-count">+{{this.extraParticipantCount}}</span>
@@ -38,7 +33,7 @@
                 {{#if this.hasAttachments}}
                     <span class="chat-inbox-conversation-pill">
                         <FaIcon @icon="paperclip" />
-                        Attachment
+                        {{t "ember-ui.components.chat-tray.conversation-row.attachment"}}
                     </span>
                 {{/if}}
                 <span class="chat-inbox-conversation-pill">
@@ -56,7 +51,7 @@
     </button>
     <div class="chat-inbox-conversation-actions">
         {{#if this.isCreator}}
-            <button type="button" class="chat-inbox-row-action" aria-label="End chat" {{on "click" this.remove}}>
+            <button type="button" class="chat-inbox-row-action" aria-label={{t "ember-ui.components.chat-tray.conversation-row.end-chat"}} {{on "click" this.remove}}>
                 <FaIcon @icon="times" />
             </button>
         {{/if}}

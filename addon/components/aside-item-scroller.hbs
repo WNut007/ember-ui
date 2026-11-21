@@ -36,7 +36,7 @@
                 {{else}}
                     <div class="flex flex-col items-center text-center my-4">
                         <div class="mb-4">
-                            <h4 class="dark:text-gray-100">No {{pluralize this.resource}}</h4>
+                            <h4 class="dark:text-gray-100">{{t "ember-ui.components.aside-item-scroller.no" resource=(pluralize this.resource)}}</h4>
                         </div>
                     </div>
                 {{/each-in}}
@@ -50,8 +50,7 @@
             <div class="flex-1">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{this.title}}</h2>
                 <p class="mt-1 text-sm text-gray-600">
-                    Search
-                    {{pluralize @items.length this.resource}}
+                    {{t "ember-ui.components.aside-item-scroller.search" resource=(pluralize @items.length this.resource)}}
                 </p>
             </div>
             <div>
@@ -61,11 +60,17 @@
             </div>
         </div>
         <div class="mt-4">
-            <Input @type="text" class="form-input w-full" @value={{this.searchQuery}} aria-label="Search Input" placeholder="Search" />
+            <Input
+                @type="text"
+                class="form-input w-full"
+                @value={{this.searchQuery}}
+                aria-label={{t "ember-ui.components.aside-item-scroller.search-input"}}
+                placeholder={{t "ember-ui.components.aside-item-scroller.search-2"}}
+            />
         </div>
     </div>
     <div class="h-screen overflow-y-scroll {{@scrollableClass}}">
-        <nav class="flex-1 min-h-0 overflow-y-auto {{@navClass}}" aria-label="Directory">
+        <nav class="flex-1 min-h-0 overflow-y-auto {{@navClass}}" aria-label={{t "ember-ui.components.aside-item-scroller.directory"}}>
             <div class="relative" {{increase-height-by 300}}>
                 {{#if @customTopItemComponent}}
                     <ul class="relative z-0 divide-y divide-gray-200 dark:divide-gray-900">
@@ -100,7 +105,7 @@
                 {{else}}
                     <div class="flex flex-col items-center text-center my-4">
                         <div class="mb-4">
-                            <h4 class="dark:text-gray-100">No {{pluralize this.resource}}</h4>
+                            <h4 class="dark:text-gray-100">{{t "ember-ui.components.aside-item-scroller.no" resource=(pluralize this.resource)}}</h4>
                         </div>
                     </div>
                 {{/each-in}}

@@ -1,15 +1,15 @@
 <Modal::Default @modalIsOpened={{@modalIsOpened}} @options={{@options}} @confirm={{@onConfirm}} @decline={{@onDecline}}>
     <div class="modal-body-container">
         <InfoBlock @type="info" @icon="lightbulb" @iconSize="lg" class="mb-5">
-            <div class="font-extrabold">Verify your email address.</div>
-            <div>Re-verify your email address and click Send to continue.</div>
+            <div class="font-extrabold">{{t "ember-ui.components.modals.resend-verification-email.verify-your-email-address"}}</div>
+            <div>{{t "ember-ui.components.modals.resend-verification-email.re-verify-your-email-address-and"}}</div>
         </InfoBlock>
 
         <InputGroup
             @type="email"
-            @name="Verify your email address"
+            @name={{t "ember-ui.components.modals.resend-verification-email.verify-your-email-address-2"}}
             @value={{@options.email}}
-            @helpText="Have a second look and confirm your email address is correct."
+            @helpText={{t "ember-ui.components.modals.resend-verification-email.have-a-second-look-and-confirm"}}
             @inputClass="input-lg"
         />
     </div>

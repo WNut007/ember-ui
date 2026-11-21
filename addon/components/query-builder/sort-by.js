@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -9,6 +10,7 @@ import { action } from '@ember/object';
 const columnKey = (column) => column.full ?? column.name;
 
 export default class QueryBuilderSortByComponent extends Component {
+    @service intl;
     @tracked selectedSortBy = null;
     /* istanbul ignore next -- the constructor assigns this before anything reads it */
     @tracked selectedSortDirection = null;
@@ -25,8 +27,8 @@ export default class QueryBuilderSortByComponent extends Component {
 
     get directions() {
         return [
-            { value: 'asc', label: 'Ascending', icon: 'arrow-up' },
-            { value: 'desc', label: 'Descending', icon: 'arrow-down' },
+            { value: 'asc', label: this.intl.t('ember-ui.js.components.query-builder.sort-by.ascending'), icon: 'arrow-up' },
+            { value: 'desc', label: this.intl.t('ember-ui.js.components.query-builder.sort-by.descending'), icon: 'arrow-down' },
         ];
     }
 

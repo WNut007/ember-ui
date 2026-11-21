@@ -8,6 +8,7 @@ import { task } from 'ember-concurrency';
 import removeNullish from '../utils/remove-nullish';
 
 export default class ReportBuilderComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
     // The constructor assigns both before anything reads them.
@@ -23,12 +24,12 @@ export default class ReportBuilderComponent extends Component {
     @tracked tabs = [
         {
             id: 'configuration',
-            label: 'Configuration',
+            label: this.intl.t('ember-ui.js.components.report-builder.configuration'),
             icon: 'filter',
         },
         {
             id: 'preview',
-            label: 'Preview',
+            label: this.intl.t('ember-ui.js.components.report-builder.preview'),
             icon: 'table',
         },
     ];
@@ -50,7 +51,7 @@ export default class ReportBuilderComponent extends Component {
             );
             this.tables = isArray(this.schema.tables) ? this.schema.tables : [];
         } catch (e) {
-            this.notifications.error('Failed to load data sources');
+            this.notifications.error(this.intl.t('ember-ui.js.components.report-builder.failed-to-load-data-sources'));
         }
     }
 

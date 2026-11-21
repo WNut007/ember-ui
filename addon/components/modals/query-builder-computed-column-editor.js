@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default class ModalsQueryBuilderComputedColumnEditorComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
     @service modalsManager;
@@ -45,12 +46,12 @@ export default class ModalsQueryBuilderComputedColumnEditorComponent extends Com
 
     get typeOptions() {
         return [
-            { value: 'string', label: 'Text' },
-            { value: 'integer', label: 'Integer' },
-            { value: 'decimal', label: 'Decimal' },
-            { value: 'date', label: 'Date' },
-            { value: 'datetime', label: 'Date & Time' },
-            { value: 'boolean', label: 'Boolean' },
+            { value: 'string', label: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.text') },
+            { value: 'integer', label: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.integer') },
+            { value: 'decimal', label: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.decimal') },
+            { value: 'date', label: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.date') },
+            { value: 'datetime', label: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.date-time') },
+            { value: 'boolean', label: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.boolean') },
         ];
     }
 
@@ -184,37 +185,37 @@ export default class ModalsQueryBuilderComputedColumnEditorComponent extends Com
             {
                 name: 'Calculate Days Between Dates',
                 expression: 'DATEDIFF(end_date, start_date) + 1',
-                description: 'Calculate the number of days between two dates',
+                description: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.calculate-the-number-of-days-between'),
             },
             {
                 name: 'Concatenate Fields',
                 expression: "CONCAT(first_name, ' ', last_name)",
-                description: 'Combine multiple text fields',
+                description: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.combine-multiple-text-fields'),
             },
             {
                 name: 'Conditional Value',
                 expression: "CASE WHEN amount > 100 THEN 'High' ELSE 'Low' END",
-                description: 'Return different values based on conditions',
+                description: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.return-different-values-based-on-conditions'),
             },
             {
                 name: 'Read a JSON Value',
                 expression: "CAST(JSON_UNQUOTE(JSON_EXTRACT(meta, '$.total')) AS DECIMAL(15,2)) / 100",
-                description: 'Read a number stored in a JSON column such as meta, e.g. an order total in cents, as a decimal',
+                description: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.read-a-number-stored-in-a'),
             },
             {
                 name: 'Group by Month',
                 expression: "DATE_FORMAT(created_at, '%Y-%m')",
-                description: 'Bucket rows by month; use it as a Group By column',
+                description: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.bucket-rows-by-month-use-it'),
             },
             {
                 name: 'Related JSON Value',
                 expression: "CAST(JSON_UNQUOTE(JSON_EXTRACT(payload.entities.meta, '$.quantity')) AS DECIMAL(15,2))",
-                description: 'Reference related columns by their path, as listed in the column picker, e.g. a quantity kept in order item metadata',
+                description: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.reference-related-columns-by-their-path'),
             },
             {
                 name: 'Safe Division',
                 expression: 'ROUND(amount / NULLIF(quantity, 0), 2)',
-                description: 'Divide with protection against division by zero',
+                description: this.intl.t('ember-ui.js.components.modals.query-builder-computed-column-editor.divide-with-protection-against-division-by'),
             },
         ];
     }

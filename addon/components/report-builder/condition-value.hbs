@@ -7,10 +7,10 @@
 {{else if this.isBoolean}}
     <div class="report-builder-boolean-value flex flex-row items-center space-x-4">
         <RadioButton @name={{this.booleanGroupName}} @value={{true}} @groupValue={{this.booleanValue}} @changed={{this.change}} @radioClass="form-radio">
-            <span class="ml-1.5 text-sm">True</span>
+            <span class="ml-1.5 text-sm">{{t "ember-ui.components.report-builder.condition-value.true"}}</span>
         </RadioButton>
         <RadioButton @name={{this.booleanGroupName}} @value={{false}} @groupValue={{this.booleanValue}} @changed={{this.change}} @radioClass="form-radio">
-            <span class="ml-1.5 text-sm">False</span>
+            <span class="ml-1.5 text-sm">{{t "ember-ui.components.report-builder.condition-value.false"}}</span>
         </RadioButton>
     </div>
 {{else if this.isJSON}}

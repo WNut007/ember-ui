@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action, set, get, getProperties, setProperties } from '@ember/object';
@@ -10,6 +11,7 @@ import { guidFor } from '@ember/object/internals';
 const { assign } = Object;
 
 export default class ModalsManagerService extends Service {
+    @service intl;
     // Optional events service; undefined when the host app does not register one.
     get events() {
         return getOwner(this).lookup('service:events');
@@ -165,7 +167,7 @@ export default class ModalsManagerService extends Service {
         options = assign(options, {
             hideTitle: true,
             hideAcceptButton: true,
-            declineButtonText: 'OK',
+            declineButtonText: this.intl.t('ember-ui.js.services.modals-manager.ok'),
             modalClass,
         });
 
@@ -216,7 +218,7 @@ export default class ModalsManagerService extends Service {
     @action async displayLoader(options = {}) {
         await this.done();
 
-        this.show('modal/layouts/loading', { title: 'Loading...', ...options });
+        this.show('modal/layouts/loading', { title: this.intl.t('ember-ui.js.services.modals-manager.loading'), ...options });
     }
 
     /**

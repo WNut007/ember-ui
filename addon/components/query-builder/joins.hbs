@@ -2,10 +2,10 @@
     <div class="query-builder-panel-header">
         <div class="query-builder-panel-title">
             <FaIcon @icon="link" @size="sm" class="mr-2" />
-            Joins
+            {{t "ember-ui.components.query-builder.joins.joins"}}
         </div>
         <div class="text-xs text-gray-500">
-            {{if this.joins.length (concat this.joins.length " join" (if (gt this.joins.length 1) "s")) "No joins"}}
+            {{if this.joins.length (concat this.joins.length " join" (if (gt this.joins.length 1) "s")) (t "ember-ui.components.query-builder.joins.no-joins")}}
         </div>
     </div>
 
@@ -13,7 +13,7 @@
         {{#if this.relationships.length}}
             <div class="space-y-4">
                 <div class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-3">
-                    Available Relationships
+                    {{t "ember-ui.components.query-builder.joins.available-relationships"}}
                 </div>
 
                 <div class="grid grid-cols-1 gap-3">
@@ -27,8 +27,7 @@
                                             {{relationship.label}}
                                         </div>
                                         <div class="text-xs text-gray-500 dark:text-gray-400">
-                                            {{relationship.table}}
-                                            table
+                                            {{t "ember-ui.components.query-builder.joins.table" table=relationship.table}}
                                         </div>
                                     </div>
                                 </div>
@@ -44,12 +43,10 @@
                                     <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-700">
                                         <div class="flex items-center justify-between mb-3">
                                             <div class="text-xs font-medium text-blue-800 dark:text-blue-200">
-                                                Select columns from
-                                                {{relationship.label}}
+                                                {{t "ember-ui.components.query-builder.joins.select-columns-from" label=relationship.label}}
                                             </div>
                                             <div class="text-xs text-blue-600 dark:text-blue-400">
-                                                {{joinedRel.selectedColumns.length}}
-                                                selected
+                                                {{t "ember-ui.components.query-builder.joins.selected" length=joinedRel.selectedColumns.length}}
                                             </div>
                                         </div>
 
@@ -59,14 +56,14 @@
                                                 class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-700"
                                                 {{on "click" (fn this.selectAllJoinColumns relationship.key)}}
                                             >
-                                                Select All
+                                                {{t "ember-ui.components.query-builder.joins.select-all"}}
                                             </button>
                                             <button
                                                 type="button"
                                                 class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-200 dark:hover:bg-gray-600"
                                                 {{on "click" (fn this.selectNoneJoinColumns relationship.key)}}
                                             >
-                                                Select None
+                                                {{t "ember-ui.components.query-builder.joins.select-none"}}
                                             </button>
                                         </div>
 
@@ -87,7 +84,7 @@
                                                     {{#if (includes column.name (map-by "name" joinedRel.selectedColumns))}}
                                                         <Input
                                                             @value={{this.getColumnAlias relationship.key column.name}}
-                                                            placeholder="Alias (optional)"
+                                                            placeholder={{t "ember-ui.components.query-builder.joins.alias-optional"}}
                                                             class="form-input form-input-sm column-alias-input"
                                                             {{on "input" (fn this.updateJoinColumnAlias relationship.key column.name)}}
                                                         />
@@ -108,11 +105,9 @@
                     <div class="flex items-start space-x-2">
                         <FaIcon @icon="exclamation-triangle" @size="sm" class="text-yellow-600 dark:text-yellow-400 mt-0.5" />
                         <div class="text-xs text-yellow-800 dark:text-yellow-200">
-                            <div class="font-medium">Performance Warning</div>
+                            <div class="font-medium">{{t "ember-ui.components.query-builder.joins.performance-warning"}}</div>
                             <div class="mt-1">
-                                You have
-                                {{this.totalJoinedColumns}}
-                                joined columns selected. Consider selecting only the columns you need for better performance.
+                                {{t "ember-ui.components.query-builder.joins.you-have-joined-columns-selected-consider" totalJoinedColumns=this.totalJoinedColumns}}
                             </div>
                         </div>
                     </div>
@@ -123,9 +118,9 @@
                 <div class="flex items-center justify-center border border-dashed border-gray-300 dark:border-gray-600 p-6 rounded-xl bg-gray-50 dark:bg-gray-800">
                     <div class="text-center">
                         <FaIcon @icon="link" @size="2x" class="text-gray-400 mb-2" />
-                        <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">No relationships available</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">{{t "ember-ui.components.query-builder.joins.no-relationships-available"}}</div>
                         <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                            This table has no defined relationships to join with other tables
+                            {{t "ember-ui.components.query-builder.joins.this-table-has-no-defined-relationships"}}
                         </div>
                     </div>
                 </div>

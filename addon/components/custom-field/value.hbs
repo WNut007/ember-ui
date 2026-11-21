@@ -2,16 +2,16 @@
     <div class="field-name">{{@customField.label}}</div>
     <div class="field-value">
         {{#if this.isBoolean}}
-            <Badge @status={{if this.value "success" ""}}>{{if this.value "Yes" "No"}}</Badge>
+            <Badge @status={{if this.value "success" ""}}>{{if this.value (t "ember-ui.components.custom-field.value.yes") (t "ember-ui.components.custom-field.value.no")}}</Badge>
         {{else if this.isFile}}
             <File @file={{this.value}} @onDownload={{this.downloadFile}} class="custom-field-file" />
         {{else if this.isSignature}}
             {{#if this.signatureUrl}}
-                <img src={{this.signatureUrl}} alt="Signature" class="custom-field-signature-image" />
+                <img src={{this.signatureUrl}} alt={{t "ember-ui.components.custom-field.value.signature"}} class="custom-field-signature-image" />
                 {{#if this.canDownloadSignature}}
                     <a href="javascript:;" class="custom-field-signature-download text-xs text-blue-500 hover:text-blue-600 inline-flex items-center mt-1" {{on "click" this.downloadFile}}>
                         <FaIcon @icon="download" @size="sm" class="mr-1" />
-                        Download
+                        {{t "ember-ui.components.custom-field.value.download"}}
                     </a>
                 {{/if}}
             {{else if this.value}}

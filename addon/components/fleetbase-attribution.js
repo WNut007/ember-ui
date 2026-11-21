@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import config from 'ember-get-config';
 
 export default class FleetbaseAttributionComponent extends Component {
+    @service intl;
     @service modalsManager;
 
     licensingUrl = 'https://www.fleetbase.io';
@@ -18,8 +19,8 @@ export default class FleetbaseAttributionComponent extends Component {
 
     @action openLegalNotice() {
         this.modalsManager.show('modals/fleetbase-legal-notice', {
-            title: 'Fleetbase Legal Notices',
-            acceptButtonText: 'Done',
+            title: this.intl.t('ember-ui.js.components.fleetbase-attribution.fleetbase-legal-notices'),
+            acceptButtonText: this.intl.t('ember-ui.js.components.fleetbase-attribution.done'),
             acceptButtonIcon: 'check',
             hideDeclineButton: true,
             modalClass: 'modal-md fleetbase-legal-notice-modal',

@@ -8,7 +8,7 @@
             <button
                 type="button"
                 class="tb-toolbar-btn flex items-center space-x-1 px-2 py-1.5 rounded text-xs font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-colors mr-1"
-                title={{or @closeLabel "Close"}}
+                title={{or @closeLabel (t "ember-ui.components.template-builder.toolbar.close")}}
                 {{on "click" this.close}}
             >
                 <FaIcon @icon={{or @closeIcon "chevron-left"}} class="w-3.5 h-3.5" />
@@ -23,7 +23,7 @@
             <button
                 type="button"
                 class="tb-toolbar-btn flex items-center space-x-1 px-2 py-1.5 rounded text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-colors"
-                title="Add {{et.label}}"
+                title={{t "ember-ui.components.template-builder.toolbar.add" label=et.label}}
                 {{on "click" (fn this.addElement et.type)}}
             >
                 <FaIcon @icon={{et.icon}} class="w-3.5 h-3.5" />
@@ -37,7 +37,7 @@
         <button
             type="button"
             class="tb-toolbar-btn p-1.5 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            title="Zoom out"
+            title={{t "ember-ui.components.template-builder.toolbar.zoom-out"}}
             {{on "click" this.zoomOut}}
         >
             <FaIcon @icon="magnifying-glass-minus" class="w-3.5 h-3.5" />
@@ -45,7 +45,7 @@
         <button
             type="button"
             class="tb-toolbar-btn px-2 py-1 rounded text-xs font-mono text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors min-w-12 text-center"
-            title="Reset zoom"
+            title={{t "ember-ui.components.template-builder.toolbar.reset-zoom"}}
             {{on "click" this.zoomReset}}
         >
             {{this.zoomPercent}}
@@ -53,7 +53,7 @@
         <button
             type="button"
             class="tb-toolbar-btn p-1.5 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            title="Zoom in"
+            title={{t "ember-ui.components.template-builder.toolbar.zoom-in"}}
             {{on "click" this.zoomIn}}
         >
             <FaIcon @icon="magnifying-glass-plus" class="w-3.5 h-3.5" />
@@ -67,10 +67,8 @@
         <button
             type="button"
             class="tb-toolbar-btn p-1.5 rounded transition-colors disabled:opacity-40 disabled:cursor-not-allowed
-                {{if @selectedElement
-                    'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                    'text-gray-400 dark:text-gray-600'}}"
-            title="Rotate left 90°"
+                {{if @selectedElement 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800' 'text-gray-400 dark:text-gray-600'}}"
+            title={{t "ember-ui.components.template-builder.toolbar.rotate-left-90"}}
             disabled={{not @selectedElement}}
             {{on "click" this.rotateLeft}}
         >
@@ -79,10 +77,8 @@
         <button
             type="button"
             class="tb-toolbar-btn p-1.5 rounded transition-colors disabled:opacity-40 disabled:cursor-not-allowed
-                {{if @selectedElement
-                    'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                    'text-gray-400 dark:text-gray-600'}}"
-            title="Rotate right 90°"
+                {{if @selectedElement 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800' 'text-gray-400 dark:text-gray-600'}}"
+            title={{t "ember-ui.components.template-builder.toolbar.rotate-right-90"}}
             disabled={{not @selectedElement}}
             {{on "click" this.rotateRight}}
         >
@@ -94,7 +90,7 @@
         <button
             type="button"
             class="tb-toolbar-btn p-1.5 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-            title="Undo"
+            title={{t "ember-ui.components.template-builder.toolbar.undo"}}
             disabled={{not @canUndo}}
             {{on "click" this.undo}}
         >
@@ -103,7 +99,7 @@
         <button
             type="button"
             class="tb-toolbar-btn p-1.5 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-            title="Redo"
+            title={{t "ember-ui.components.template-builder.toolbar.redo"}}
             disabled={{not @canRedo}}
             {{on "click" this.redo}}
         >
@@ -115,20 +111,13 @@
         <button
             type="button"
             class="tb-toolbar-btn flex items-center space-x-1.5 px-3 py-1.5 rounded text-xs font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-            title="Preview template"
+            title={{t "ember-ui.components.template-builder.toolbar.preview-template"}}
             {{on "click" this.preview}}
         >
             <FaIcon @icon="eye" class="w-3.5 h-3.5" />
-            <span>Preview</span>
+            <span>{{t "ember-ui.components.template-builder.toolbar.preview"}}</span>
         </button>
 
-        <Button
-            @type="primary"
-            @icon="floppy-disk"
-            @text="Save"
-            @size="xs"
-            @isLoading={{@isSaving}}
-            @onClick={{this.save}}
-        />
+        <Button @type="primary" @icon="floppy-disk" @text={{t "ember-ui.components.template-builder.toolbar.save"}} @size="xs" @isLoading={{@isSaving}} @onClick={{this.save}} />
     </div>
 </div>

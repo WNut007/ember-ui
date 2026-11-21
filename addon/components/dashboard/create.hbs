@@ -1,5 +1,5 @@
 <div class="fleetbase-dashboard-grid" ...attributes {{did-insert this.setElement}} {{did-update this.onEditChange @isEdit}}>
-    {{!--
+    {{!
         Keyed iteration over a single-element [dashboardId] array. When the
         active dashboard changes the iteration key changes, ember destroys the
         existing GridStack (running its willDestroyNode → gridstack.destroy,
@@ -8,7 +8,7 @@
         layout), and re-instantiates a fresh GridStack on the new dashboard's
         widgets. This is the only reliable way to keep the empty band that
         gridstack leaves behind from carrying over between dashboards.
-    --}}
+    }}
     {{#each this.dashboardKey key="@identity" as |dashId|}}
         <GridStack @options={{this.gridOptions}} @onChange={{this.onChangeGrid}} data-id={{dashId}}>
             {{#each @dashboard.widgets as |widget|}}
@@ -21,7 +21,12 @@
 
                             {{#if @isEdit}}
                                 <div class="absolute top-2 right-2">
-                                    <Button @type="default" @icon="trash" @helpText="Remove widget from the dashboard" @onClick={{fn this.removeWidget widget}} />
+                                    <Button
+                                        @type="default"
+                                        @icon="trash"
+                                        @helpText={{t "ember-ui.components.dashboard.create.remove-widget-from-the-dashboard"}}
+                                        @onClick={{fn this.removeWidget widget}}
+                                    />
                                 </div>
                             {{/if}}
                         </GridStackItem>

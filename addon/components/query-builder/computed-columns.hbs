@@ -3,10 +3,10 @@
         <div class="flex flex-row items-center space-x-2">
             <div class="query-builder-panel-title">
                 <FaIcon @icon="superscript" @size="sm" class="mr-2" />
-                Computed Columns
+                {{t "ember-ui.components.query-builder.computed-columns.computed-columns"}}
             </div>
         </div>
-        <Button @text="Add Computed Column" @icon="plus" @type="default" @size="xs" @onClick={{this.addComputedColumn}} />
+        <Button @text={{t "ember-ui.components.query-builder.computed-columns.add-computed-column"}} @icon="plus" @type="default" @size="xs" @onClick={{this.addComputedColumn}} />
     </div>
 
     {{#if this.hasComputedColumns}}
@@ -34,8 +34,19 @@
                         {{/if}}
                     </div>
                     <div class="flex items-center gap-1 ml-3">
-                        <Button @icon="edit" @size="xs" @onClick={{fn this.editComputedColumn column}} @helpText="Edit computed column" />
-                        <Button @icon="trash" @type="danger" @size="xs" @onClick={{fn this.removeComputedColumn column}} @helpText="Remove computed column" />
+                        <Button
+                            @icon="edit"
+                            @size="xs"
+                            @onClick={{fn this.editComputedColumn column}}
+                            @helpText={{t "ember-ui.components.query-builder.computed-columns.edit-computed-column"}}
+                        />
+                        <Button
+                            @icon="trash"
+                            @type="danger"
+                            @size="xs"
+                            @onClick={{fn this.removeComputedColumn column}}
+                            @helpText={{t "ember-ui.components.query-builder.computed-columns.remove-computed-column"}}
+                        />
                     </div>
                 </div>
             {{/each}}
@@ -46,12 +57,12 @@
                 <div class="flex flex-col items-center justify-center text-center">
                     <FaIcon @icon="function" @size="2x" class="text-gray-400 mb-2" />
                     <p class="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                        No computed columns defined yet
+                        {{t "ember-ui.components.query-builder.computed-columns.no-computed-columns-defined-yet"}}
                     </p>
                     <p class="text-xs text-gray-500 dark:text-gray-500 mt-1 mb-2">
-                        Computed columns allow you to create calculated fields using SQL expressions
+                        {{t "ember-ui.components.query-builder.computed-columns.computed-columns-allow-you-to-create"}}
                     </p>
-                    <Button @text="Add the first computed column" @icon="plus" @size="xs" @onClick={{this.addComputedColumn}} />
+                    <Button @text={{t "ember-ui.components.query-builder.computed-columns.add-the-first-computed-column"}} @icon="plus" @size="xs" @onClick={{this.addComputedColumn}} />
                 </div>
             </div>
         </div>

@@ -1,8 +1,10 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class QueryBuilderColumnSelectComponent extends Component {
+    @service intl;
     /* istanbul ignore next -- @tracked initializer: the value is assigned before it is ever
        read, so this lazy initializer is never invoked. */
     @tracked selectedColumns = [];
@@ -45,9 +47,8 @@ export default class QueryBuilderColumnSelectComponent extends Component {
         if (summaryColumns.length) {
             sections.push({
                 key: 'summaries',
-                title: 'Summaries',
-                description:
-                    'One value across every matching row, or one per group when the report is grouped. Select them on their own for a totals row, or add a Group By to combine them with other fields.',
+                title: this.intl.t('ember-ui.js.components.query-builder.column-select.summaries'),
+                description: this.intl.t('ember-ui.js.components.query-builder.column-select.one-value-across-every-matching-row'),
                 columns: summaryColumns,
             });
         }

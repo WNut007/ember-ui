@@ -4,42 +4,42 @@
             href="#"
             id="fleetbase-pagination-previous-button"
             class="direction-button {{@directionButtonClass}} {{if this.cannotStepBackward 'disabled'}}"
-            {{!-- `disabled` is not a valid attribute on an anchor; aria-disabled is what
-                assistive technology actually reads. incrementPage still guards the boundary. --}}
+            {{! `disabled` is not a valid attribute on an anchor; aria-disabled is what
+                assistive technology actually reads. incrementPage still guards the boundary. }}
             aria-disabled={{if this.cannotStepBackward "true" "false"}}
             tabindex="-1"
-            aria-label="Previous"
+            aria-label={{t "ember-ui.components.pagination.previous"}}
             {{on "click" (fn this.incrementPage -1)}}
         >
-            Previous
+            {{t "ember-ui.components.pagination.previous"}}
         </a>
         <a
             href="#"
             id="fleetbase-pagination-next-button"
             class="ml-3 direction-button {{@directionButtonClass}} {{if this.cannotStepForward 'disabled'}}"
             aria-disabled={{if this.cannotStepForward "true" "false"}}
-            aria-label="Next"
+            aria-label={{t "ember-ui.components.pagination.next"}}
             {{on "click" (fn this.incrementPage 1)}}
         >
-            Next
+            {{t "ember-ui.components.pagination.next"}}
         </a>
     </div>
     <div class="fleetbase-pagination-meta-info-wrapper hidden sm:flex-1 sm:flex sm:items-center sm:justify-between {{@metaInfoWrapperClass}}">
         <div class={{concat "fleetbase-pagination-meta-info" " " @metaInfoClass}}>
             <p class="fleetbase-pagination-meta-info-content text-sm leading-5 text-gray-700 pagination-showing {{@metaInfoParagraph}}">
-                Showing
+                {{t "ember-ui.components.pagination.showing"}}
                 <span class="font-medium">
                     {{this.from}}
                 </span>
-                to
+                {{t "ember-ui.components.pagination.to"}}
                 <span class="font-medium">
                     {{this.to}}
                 </span>
-                of
+                {{t "ember-ui.components.pagination.of"}}
                 <span class="font-medium">
                     {{this.totalResults}}
                 </span>
-                results
+                {{t "ember-ui.components.pagination.results"}}
             </p>
         </div>
 

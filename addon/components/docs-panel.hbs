@@ -11,8 +11,14 @@
         <Overlay::Header @title={{this.docsPanel.title}} @hideStatusDot={{true}}>
             <:actions>
                 <div class="flex flex-1 justify-end gap-2">
-                    <Button @type="default" @icon="arrow-up-right-from-square" @size="xs" @helpText="Open documentation in a new tab" @onClick={{this.openExternal}} />
-                    <Button @type="default" @icon="times" @size="xs" @helpText="Close documentation" @onClick={{this.close}} />
+                    <Button
+                        @type="default"
+                        @icon="arrow-up-right-from-square"
+                        @size="xs"
+                        @helpText={{t "ember-ui.components.docs-panel.open-documentation-in-a-new-tab"}}
+                        @onClick={{this.openExternal}}
+                    />
+                    <Button @type="default" @icon="times" @size="xs" @helpText={{t "ember-ui.components.docs-panel.close-documentation"}} @onClick={{this.close}} />
                 </div>
             </:actions>
         </Overlay::Header>
@@ -21,13 +27,13 @@
                 {{#if this.docsPanel.isIframeLoading}}
                     <div class="fleetbase-docs-panel-loading">
                         <Spinner @iconClass="text-sky-500 fa-spin-800ms" />
-                        <span>Loading documentation...</span>
+                        <span>{{t "ember-ui.components.docs-panel.loading-documentation"}}</span>
                     </div>
                 {{/if}}
                 <iframe
                     src={{this.docsPanel.url}}
                     title={{this.docsPanel.title}}
-                    class="h-full w-full border-0 {{if this.docsPanel.isIframeThemeDark "bg-gray-900" "bg-white"}}"
+                    class="h-full w-full border-0 {{if this.docsPanel.isIframeThemeDark 'bg-gray-900' 'bg-white'}}"
                     loading="lazy"
                     referrerpolicy="strict-origin-when-cross-origin"
                     {{on "load" this.markIframeLoaded}}
@@ -39,12 +45,12 @@
                         <FaIcon @icon="book-open" />
                     </div>
                     <div>
-                        <div class="text-sm font-bold text-gray-900 dark:text-gray-100">Open Fleetbase documentation</div>
+                        <div class="text-sm font-bold text-gray-900 dark:text-gray-100">{{t "ember-ui.components.docs-panel.open-fleetbase-documentation"}}</div>
                         <div class="mt-1 max-w-sm text-xs text-gray-500 dark:text-gray-400">
-                            This page cannot be embedded here, but you can open it in a new tab.
+                            {{t "ember-ui.components.docs-panel.this-page-cannot-be-embedded-here"}}
                         </div>
                     </div>
-                    <Button @type="primary" @icon="arrow-up-right-from-square" @text="Open documentation" @onClick={{this.openExternal}} />
+                    <Button @type="primary" @icon="arrow-up-right-from-square" @text={{t "ember-ui.components.docs-panel.open-documentation"}} @onClick={{this.openExternal}} />
                 </div>
             {{/if}}
         </Overlay::Body>

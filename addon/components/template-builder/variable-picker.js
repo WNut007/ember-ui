@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -20,6 +21,7 @@ import { action } from '@ember/object';
  * @argument {Function} onClose        - Called when the picker should be dismissed
  */
 export default class TemplateBuilderVariablePickerComponent extends Component {
+    @service intl;
     @tracked activeTab = 'variables';
     @tracked searchQuery = '';
     @tracked expandedNamespaces = new Set();
@@ -150,16 +152,16 @@ export default class TemplateBuilderVariablePickerComponent extends Component {
 
     get globalVariables() {
         return [
-            { path: 'company.name', label: 'Company Name', type: 'string', example: 'Acme Logistics' },
-            { path: 'company.email', label: 'Company Email', type: 'string', example: 'hello@acme.com' },
-            { path: 'company.phone', label: 'Company Phone', type: 'string', example: '+1 555 0100' },
-            { path: 'company.address', label: 'Company Address', type: 'string', example: '123 Main St' },
-            { path: 'company.logo', label: 'Company Logo URL', type: 'url', example: 'https://...' },
-            { path: 'user.name', label: 'Current User', type: 'string', example: 'John Doe' },
-            { path: 'user.email', label: 'User Email', type: 'string', example: 'john@acme.com' },
-            { path: 'now', label: 'Current DateTime', type: 'datetime', example: '2025-03-03 14:00' },
-            { path: 'today', label: "Today's Date", type: 'date', example: '2025-03-03' },
-            { path: 'year', label: 'Current Year', type: 'number', example: '2025' },
+            { path: 'company.name', label: this.intl.t('ember-ui.js.components.template-builder.variable-picker.company-name'), type: 'string', example: 'Acme Logistics' },
+            { path: 'company.email', label: this.intl.t('ember-ui.js.components.template-builder.variable-picker.company-email'), type: 'string', example: 'hello@acme.com' },
+            { path: 'company.phone', label: this.intl.t('ember-ui.js.components.template-builder.variable-picker.company-phone'), type: 'string', example: '+1 555 0100' },
+            { path: 'company.address', label: this.intl.t('ember-ui.js.components.template-builder.variable-picker.company-address'), type: 'string', example: '123 Main St' },
+            { path: 'company.logo', label: this.intl.t('ember-ui.js.components.template-builder.variable-picker.company-logo-url'), type: 'url', example: 'https://...' },
+            { path: 'user.name', label: this.intl.t('ember-ui.js.components.template-builder.variable-picker.current-user'), type: 'string', example: 'John Doe' },
+            { path: 'user.email', label: this.intl.t('ember-ui.js.components.template-builder.variable-picker.user-email'), type: 'string', example: 'john@acme.com' },
+            { path: 'now', label: this.intl.t('ember-ui.js.components.template-builder.variable-picker.current-datetime'), type: 'datetime', example: '2025-03-03 14:00' },
+            { path: 'today', label: this.intl.t('ember-ui.js.components.template-builder.variable-picker.today-s-date'), type: 'date', example: '2025-03-03' },
+            { path: 'year', label: this.intl.t('ember-ui.js.components.template-builder.variable-picker.current-year'), type: 'number', example: '2025' },
         ];
     }
 

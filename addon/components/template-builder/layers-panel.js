@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -20,6 +21,7 @@ import { action } from '@ember/object';
  * @argument {Function} onReorderElement - Called with (uuid, direction) — 'up' or 'down'
  */
 export default class TemplateBuilderLayersPanelComponent extends Component {
+    @service intl;
     @tracked renamingUuid = null;
     /* istanbul ignore next -- startRename assigns this before the rename field that reads it
        is rendered */
@@ -49,7 +51,7 @@ export default class TemplateBuilderLayersPanelComponent extends Component {
     elementLabel(element) {
         if (element.label) return element.label;
         const typeLabels = {
-            text: 'Text',
+            text: this.intl.t('ember-ui.js.components.template-builder.layers-panel.text'),
             image: 'Image',
             table: 'Table',
             line: 'Line',

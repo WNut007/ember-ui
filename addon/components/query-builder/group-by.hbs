@@ -4,10 +4,10 @@
     <div class="query-builder-panel-header">
         <div class="query-builder-panel-title">
             <FaIcon @icon="layer-group" @size="sm" class="mr-2" />
-            Group By
+            {{t "ember-ui.components.query-builder.group-by.group-by"}}
         </div>
         <div class="text-xs text-gray-500">
-            {{if this.groupByItems.length (concat this.groupByItems.length " group" (if (gt this.groupByItems.length 1) "s")) "No grouping"}}
+            {{if this.groupByItems.length (concat this.groupByItems.length " group" (if (gt this.groupByItems.length 1) "s")) (t "ember-ui.components.query-builder.group-by.no-grouping")}}
         </div>
     </div>
 
@@ -17,14 +17,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <div>
                         <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                            Group By Column
+                            {{t "ember-ui.components.query-builder.group-by.group-by-column"}}
                         </label>
                         <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                             <PowerSelect
                                 @options={{this.availableGroupByColumns}}
                                 @selected={{this.selectedGroupBy}}
                                 @onChange={{this.selectGroupBy}}
-                                @placeholder="Select column..."
+                                @placeholder={{t "ember-ui.components.query-builder.group-by.select-column"}}
                                 @triggerClass="form-select form-input"
                                 @searchEnabled={{true}}
                                 @searchField="label"
@@ -40,14 +40,14 @@
 
                     <div>
                         <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                            Calculate
+                            {{t "ember-ui.components.query-builder.group-by.calculate"}}
                         </label>
                         <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                             <PowerSelect
                                 @options={{this.aggregateFunctions}}
                                 @selected={{this.selectedAggregateFn}}
                                 @onChange={{this.selectAggregateFn}}
-                                @placeholder="Select function..."
+                                @placeholder={{t "ember-ui.components.query-builder.group-by.select-function"}}
                                 @triggerClass="form-select form-input"
                                 as |option|
                             >
@@ -61,14 +61,14 @@
 
                     <div>
                         <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                            Of Column
+                            {{t "ember-ui.components.query-builder.group-by.of-column"}}
                         </label>
                         <div class="fleetbase-model-select fleetbase-power-select ember-model-select">
                             <PowerSelect
                                 @options={{this.availableAggregateColumns}}
                                 @selected={{this.selectedAggregateBy}}
                                 @onChange={{this.selectAggregateBy}}
-                                @placeholder="Select column..."
+                                @placeholder={{t "ember-ui.components.query-builder.group-by.select-column"}}
                                 @triggerClass="form-select form-input"
                                 @disabled={{not this.selectedAggregateFn}}
                                 @searchEnabled={{true}}
@@ -87,7 +87,7 @@
                 </div>
 
                 <Button
-                    @text="Add Grouping"
+                    @text={{t "ember-ui.components.query-builder.group-by.add-grouping"}}
                     @type="primary"
                     @icon="save"
                     @size="xs"
@@ -99,7 +99,7 @@
             {{#if this.groupByItems.length}}
                 <div class="mt-6 space-y-3">
                     <div class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Active Groupings
+                        {{t "ember-ui.components.query-builder.group-by.active-groupings"}}
                     </div>
 
                     <DragSortList @items={{this.groupByItems}} @dragEndAction={{this.reorderGroupBy}} class="drag-sort-list" as |item index|>
@@ -111,14 +111,13 @@
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center space-x-2 text-sm">
                                     <span class="font-medium text-gray-900 dark:text-gray-100">
-                                        Group by
-                                        {{item.groupBy.label}}
+                                        {{t "ember-ui.components.query-builder.group-by.group-by-2" label=item.groupBy.label}}
                                     </span>
                                     <span class="text-gray-500">→</span>
                                     <span class="text-indigo-600 dark:text-indigo-400 font-medium">
                                         {{item.aggregateFn.label}}
                                     </span>
-                                    <span class="text-gray-500">of</span>
+                                    <span class="text-gray-500">{{t "ember-ui.components.query-builder.group-by.of"}}</span>
                                     <span class="font-medium text-gray-900 dark:text-gray-100">
                                         {{item.aggregateBy.label}}
                                     </span>
@@ -147,7 +146,7 @@
                         </div>
                         {{#unless @selectedColumns.length}}
                             <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                                Select columns in the "Select Fields" section first
+                                {{t "ember-ui.components.query-builder.group-by.select-columns-in-the-select-fields"}}
                             </div>
                         {{/unless}}
                     </div>
@@ -160,11 +159,11 @@
                 <div class="flex items-start space-x-2">
                     <FaIcon @icon="info-circle" @size="sm" class="text-blue-600 dark:text-blue-400 mt-0.5" />
                     <div class="text-xs text-blue-800 dark:text-blue-200">
-                        <div class="font-medium mb-1">Grouping Rules:</div>
+                        <div class="font-medium mb-1">{{t "ember-ui.components.query-builder.group-by.grouping-rules"}}</div>
                         <ul class="space-y-1 text-blue-700 dark:text-blue-300">
-                            <li>• You can only group by columns that are selected</li>
-                            <li>• Aggregate functions calculate values for each group</li>
-                            <li>• Use COUNT(*) to count records in each group</li>
+                            <li>{{t "ember-ui.components.query-builder.group-by.you-can-only-group-by-columns"}}</li>
+                            <li>{{t "ember-ui.components.query-builder.group-by.aggregate-functions-calculate-values-for-each"}}</li>
+                            <li>{{t "ember-ui.components.query-builder.group-by.use-count-to-count-records-in"}}</li>
                         </ul>
                     </div>
                 </div>

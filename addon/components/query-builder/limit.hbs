@@ -2,17 +2,17 @@
     <div class="query-builder-panel-header">
         <div class="query-builder-panel-title">
             <FaIcon @icon="hashtag" @size="sm" class="mr-2" />
-            Limit Results
+            {{t "ember-ui.components.query-builder.limit.limit-results"}}
         </div>
         <div class="text-xs text-gray-500">
-            {{if this.limit (concat "Max " this.limit " rows") "No limit"}}
+            {{if this.limit (concat "Max " this.limit " rows") (t "ember-ui.components.query-builder.limit.no-limit")}}
         </div>
     </div>
 
     <div class="query-builder-panel-content">
         <div class="space-y-3">
             <div>
-                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Maximum rows:</label>
+                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">{{t "ember-ui.components.query-builder.limit.maximum-rows"}}</label>
                 <Input
                     @value={{this.limit}}
                     @type="number"
@@ -20,13 +20,13 @@
                     max="10000"
                     step="1"
                     {{on "input" (pick "target.value" this.setLimit)}}
-                    placeholder="Enter limit (e.g., 100)"
+                    placeholder={{t "ember-ui.components.query-builder.limit.enter-limit-e-g-100"}}
                     class="form-input w-full"
                 />
             </div>
 
             <div class="flex flex-wrap gap-2">
-                <div class="text-xs font-medium text-gray-700 dark:text-gray-300 w-full mb-1">Quick options:</div>
+                <div class="text-xs font-medium text-gray-700 dark:text-gray-300 w-full mb-1">{{t "ember-ui.components.query-builder.limit.quick-options"}}</div>
                 {{#each this.quickLimits as |quickLimit|}}
                     <button
                         type="button"
@@ -51,7 +51,7 @@
                     {{on "click" this.clearLimit}}
                 >
                     <FaIcon @icon="times" @size="sm" class="mr-2" />
-                    Remove Limit
+                    {{t "ember-ui.components.query-builder.limit.remove-limit"}}
                 </button>
             {{/if}}
 
@@ -61,10 +61,10 @@
                     <div class="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-700">
                         <div class="flex items-center space-x-2 mb-1">
                             <FaIcon @icon="exclamation-triangle" @size="sm" class="text-yellow-600 dark:text-yellow-400" />
-                            <span class="text-xs font-medium text-yellow-900 dark:text-yellow-100">Performance Notice</span>
+                            <span class="text-xs font-medium text-yellow-900 dark:text-yellow-100">{{t "ember-ui.components.query-builder.limit.performance-notice"}}</span>
                         </div>
                         <div class="text-xs text-yellow-700 dark:text-yellow-300">
-                            Large result sets may take longer to process and display.
+                            {{t "ember-ui.components.query-builder.limit.large-result-sets-may-take-longer"}}
                         </div>
                     </div>
                 {{/if}}

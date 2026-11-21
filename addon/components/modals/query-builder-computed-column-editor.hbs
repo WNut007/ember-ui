@@ -1,13 +1,18 @@
 <Modal::Default @modalIsOpened={{@modalIsOpened}} @options={{@options}} @confirm={{@onConfirm}} @decline={{@onDecline}}>
     <div class="modal-body-container">
         <div class="space-y-2">
-            <InputGroup @name="Display Label" @value={{this.label}} @disabled={{this.isValidating}} @helpText="The human-readable label shown in reports" />
             <InputGroup
-                @name="Column Name"
-                @value={{this.name}}
-                @placeholder={{or this.columnName "Column Name"}}
+                @name={{t "ember-ui.components.modals.query-builder-computed-column-editor.display-label"}}
+                @value={{this.label}}
                 @disabled={{this.isValidating}}
-                @helpText="The internal name for this column (lowercase letters, numbers and underscores). Leave it empty to use the label."
+                @helpText={{t "ember-ui.components.modals.query-builder-computed-column-editor.the-human-readable-label-shown-in"}}
+            />
+            <InputGroup
+                @name={{t "ember-ui.components.modals.query-builder-computed-column-editor.column-name"}}
+                @value={{this.name}}
+                @placeholder={{or this.columnName (t "ember-ui.components.modals.query-builder-computed-column-editor.column-name")}}
+                @disabled={{this.isValidating}}
+                @helpText={{t "ember-ui.components.modals.query-builder-computed-column-editor.the-internal-name-for-this-column"}}
             />
             {{#each this.missingFieldErrors as |error|}}
                 <div class="flex items-start text-red-600 text-sm" data-test-computed-column-missing-field>
@@ -15,17 +20,31 @@
                     <span>{{error}}</span>
                 </div>
             {{/each}}
-            <InputGroup @name="Data Type" @helpText="The expected data type of the computed value">
-                <PowerSelect @options={{this.typeOptions}} @selected={{this.type}} @onChange={{fn (mut this.type)}} @searchEnabled={{false}} @placeholder="Select data type" @triggerClass="form-select form-input" as |option|>
+            <InputGroup
+                @name={{t "ember-ui.components.modals.query-builder-computed-column-editor.data-type"}}
+                @helpText={{t "ember-ui.components.modals.query-builder-computed-column-editor.the-expected-data-type-of-the"}}
+            >
+                <PowerSelect
+                    @options={{this.typeOptions}}
+                    @selected={{this.type}}
+                    @onChange={{fn (mut this.type)}}
+                    @searchEnabled={{false}}
+                    @placeholder={{t "ember-ui.components.modals.query-builder-computed-column-editor.select-data-type"}}
+                    @triggerClass="form-select form-input"
+                    as |option|
+                >
                     {{option.label}}
                 </PowerSelect>
             </InputGroup>
-            <InputGroup @name="Expression" @helpText="SQL expression using allowed functions and column references">
+            <InputGroup
+                @name={{t "ember-ui.components.modals.query-builder-computed-column-editor.expression"}}
+                @helpText={{t "ember-ui.components.modals.query-builder-computed-column-editor.sql-expression-using-allowed-functions-and"}}
+            >
                 <Textarea
                     @value={{this.expression}}
                     class="form-input font-mono w-full text-sm"
                     rows="4"
-                    placeholder="e.g., DATEDIFF(end_date, start_date) + 1"
+                    placeholder={{t "ember-ui.components.modals.query-builder-computed-column-editor.e-g-datediff-end-date-start"}}
                     disabled={{this.isValidating}}
                     {{on "blur" this.validateExpression}}
                 />
@@ -33,12 +52,12 @@
                 {{#if this.isValidating}}
                     <div class="flex items-center text-blue-600">
                         <FaIcon @icon="spinner" @spin={{true}} class="mr-2" />
-                        <span class="text-sm">Validating expression...</span>
+                        <span class="text-sm">{{t "ember-ui.components.modals.query-builder-computed-column-editor.validating-expression"}}</span>
                     </div>
                 {{else if this.isValid}}
                     <div class="flex items-center text-green-600">
                         <FaIcon @icon="check-circle" class="mr-2" />
-                        <span class="text-sm">Expression is valid</span>
+                        <span class="text-sm">{{t "ember-ui.components.modals.query-builder-computed-column-editor.expression-is-valid"}}</span>
                     </div>
                 {{else if this.validationErrors.length}}
                     <div>
@@ -51,11 +70,16 @@
                     </div>
                 {{/if}}
             </InputGroup>
-            <InputGroup @name="Description" @value={{this.description}} @disabled={{this.isValidating}} @helpText="Optional description of what this column calculates" />
+            <InputGroup
+                @name={{t "ember-ui.components.modals.query-builder-computed-column-editor.description"}}
+                @value={{this.description}}
+                @disabled={{this.isValidating}}
+                @helpText={{t "ember-ui.components.modals.query-builder-computed-column-editor.optional-description-of-what-this-column"}}
+            />
 
             {{! Allowed Functions Reference }}
             <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
-                <h5 class="font-semibold mb-2 text-sm text-gray-800 dark:text-gray-200">Allowed Functions</h5>
+                <h5 class="font-semibold mb-2 text-sm text-gray-800 dark:text-gray-200">{{t "ember-ui.components.modals.query-builder-computed-column-editor.allowed-functions"}}</h5>
                 <div class="flex flex-wrap gap-2">
                     {{#each this.allowedFunctions as |func|}}
                         <span class="inline-flex items-center px-2 py-1 rounded text-xs font-mono bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
@@ -67,7 +91,7 @@
 
             {{! Example Expressions }}
             <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
-                <h5 class="font-semibold mb-3 text-sm text-gray-800 dark:text-gray-200">Example Expressions</h5>
+                <h5 class="font-semibold mb-3 text-sm text-gray-800 dark:text-gray-200">{{t "ember-ui.components.modals.query-builder-computed-column-editor.example-expressions"}}</h5>
                 <div class="space-y-3">
                     {{#each this.exampleExpressions as |example|}}
                         <div class="border-l-2 border-blue-400 pl-3">
@@ -81,7 +105,13 @@
                                         {{example.description}}
                                     </p>
                                 </div>
-                                <Button @text="Use" @type="default" @size="xs" @onClick={{fn this.useExample example}} class="ml-2" />
+                                <Button
+                                    @text={{t "ember-ui.components.modals.query-builder-computed-column-editor.use"}}
+                                    @type="default"
+                                    @size="xs"
+                                    @onClick={{fn this.useExample example}}
+                                    class="ml-2"
+                                />
                             </div>
                         </div>
                     {{/each}}

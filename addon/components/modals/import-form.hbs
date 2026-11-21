@@ -9,8 +9,8 @@
                 </div>
             </div>
         {{else}}
-            {{!-- import-form is a template-only component, so `this.queueFile` was undefined and the
-                dropzone silently swallowed every drop. The parent supplies the handler. --}}
+            {{! import-form is a template-only component, so `this.queueFile` was undefined and the
+                dropzone silently swallowed every drop. The parent supplies the handler. }}
             {{#let (file-queue name="spreadsheets" onFileAdded=@options.queueFile accept=(join "," @options.acceptedFileTypes)) as |queue|}}
                 <FileDropzone
                     @queue={{queue}}
@@ -44,9 +44,9 @@
                                 @buttonText={{t "component.import-modal.button-text"}}
                                 @type="magic"
                                 @icon="file-import"
-                                {{!-- Same queue as the dropzone, and NO @onFileAdded here: the
+                                {{! Same queue as the dropzone, and NO @onFileAdded here: the
                                     enclosing file-queue is already listening to this name, and a
-                                    second listener would queue every file twice. --}}
+                                    second listener would queue every file twice. }}
                                 @name="spreadsheets"
                                 @for="spreadsheets"
                                 @accept={{join "," @options.acceptedFileTypes}}
@@ -104,7 +104,9 @@
 
         {{#if @options.onImportTemplate}}
             <div class="mt-4">
-                <a onClick={{@options.onImportTemplate}} download="true" class="text-blue-500 hover:text-blue-400 text-xs">Download Import Template (XLSX)</a>
+                <a onClick={{@options.onImportTemplate}} download="true" class="text-blue-500 hover:text-blue-400 text-xs">{{t
+                        "ember-ui.components.modals.import-form.download-import-template-xlsx"
+                    }}</a>
             </div>
         {{/if}}
     </div>

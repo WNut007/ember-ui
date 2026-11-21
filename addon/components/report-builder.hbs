@@ -1,11 +1,11 @@
 <div class="form-wrapper" ...attributes>
     <div class="px-2">
-        <ContentPanel @title="Report Details" @open={{true}}>
+        <ContentPanel @title={{t "ember-ui.components.report-builder.report-details"}} @open={{true}}>
             <div class="flex flex-col space-y-2">
-                <InputGroup @name="Title" @value={{@report.title}} />
-                <InputGroup @name="Description" @value={{@report.description}} />
-                <InputGroup @name="Tags">
-                    <ModelTagInput @model={{@report}} @placeholder="Add tags to the report" as |tag|>
+                <InputGroup @name={{t "ember-ui.components.report-builder.title"}} @value={{@report.title}} />
+                <InputGroup @name={{t "ember-ui.components.report-builder.description"}} @value={{@report.description}} />
+                <InputGroup @name={{t "ember-ui.components.report-builder.tags"}}>
+                    <ModelTagInput @model={{@report}} @placeholder={{t "ember-ui.components.report-builder.add-tags-to-the-report"}} as |tag|>
                         {{tag}}
                     </ModelTagInput>
                 </InputGroup>
@@ -16,7 +16,14 @@
     <TabNavigation @tabs={{this.tabs}} @contextApi={{fn (mut this.tabContext)}}>
         <:actions>
             <div class="flex flex-row space-x-2 pr-2">
-                <Button @type="magic" @icon="play" @text="Execute" @size="xs" @onClick={{perform this.execute}} @isLoading={{this.execute.isRunning}} />
+                <Button
+                    @type="magic"
+                    @icon="play"
+                    @text={{t "ember-ui.components.report-builder.execute"}}
+                    @size="xs"
+                    @onClick={{perform this.execute}}
+                    @isLoading={{this.execute.isRunning}}
+                />
             </div>
         </:actions>
         <:default as |activeTab|>
@@ -80,8 +87,8 @@
                             <div class="flex items-center justify-center border border-dashed border-gray-300 dark:border-gray-600 p-6 rounded-xl bg-gray-50 dark:bg-gray-800">
                                 <div class="text-center">
                                     <FaIcon @icon="triangle-exclamation" @size="2x" class="text-gray-400 mb-2" />
-                                    <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">No report preview</div>
-                                    <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">Configure the report and press the execute button to preview the results.</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">{{t "ember-ui.components.report-builder.no-report-preview"}}</div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">{{t "ember-ui.components.report-builder.configure-the-report-and-press-the"}}</div>
                                 </div>
                             </div>
                         </div>

@@ -16,10 +16,7 @@
                     {{#if @options.subtitle}}
                         {{@options.subtitle}}
                     {{else}}
-                        Are you sure you want to
-                        {{@options.verb}}
-                        these
-                        {{pluralize @options.modelName}}?
+                        {{t "ember-ui.components.modals.bulk-action-model.are-you-sure-you-want-to" verb=@options.verb modelName=(pluralize @options.modelName)}}
                     {{/if}}
                 </h3>
                 <div class="mt-0.5">
@@ -27,10 +24,7 @@
                         {{#if @options.message}}
                             {{@options.message}}
                         {{else}}
-                            You have selected
-                            {{pluralize @options.count @options.modelName}}
-                            for
-                            {{@options.verb}}.
+                            {{t "ember-ui.components.modals.bulk-action-model.you-have-selected-for" modelName=(pluralize @options.count @options.modelName) verb=@options.verb}}
                         {{/if}}
                     </p>
                 </div>

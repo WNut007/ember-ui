@@ -29,18 +29,18 @@
                             <a href="javascript:;" class="notification-item {{if notification._isRemoving 'opacity-50'}}" {{on "click" (fn this.onClickNotification notification)}}>
                                 <h3 class="font-semibold text-small truncate">{{notification.data.subject}}</h3>
                                 <p class="text-xs mb-1.5 truncate">{{notification.data.message}}</p>
-                                <span class="text-xs">Received: {{notification.createdAgo}}</span>
+                                <span class="text-xs">{{t "ember-ui.components.notification-tray.received" createdAgo=notification.createdAgo}}</span>
                             </a>
                         {{else}}
                             <div class="flex flex-1 items-center justify-center w-full h-full">
-                                <span class="text-base text-gray-800 dark:text-gray-300 italic">No unread notifications</span>
+                                <span class="text-base text-gray-800 dark:text-gray-300 italic">{{t "ember-ui.components.notification-tray.no-unread-notifications"}}</span>
                             </div>
                         {{/each}}
                     </div>
                 </div>
                 <div class="px-2 py-1.5 border-t border-gray-200 dark:border-gray-700 flex flex-row space-x-4">
                     <LinkTo @route="console.notifications" class="notification-tray-view-all-link" {{on "click" this.onPressViewAllNotifications}}>
-                        View all notifications
+                        {{t "ember-ui.components.notification-tray.view-all-notifications"}}
                     </LinkTo>
                 </div>
             </div>

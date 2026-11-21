@@ -22,6 +22,7 @@ import { Color } from '@tiptap/extension-color';
 const DEFAULT_TEXT_COLOR = '#000000';
 const FALLBACK_YOUTUBE_VID_URL = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 export default class TipTapEditorComponent extends Component {
+    @service intl;
     @service fetch;
     @service modalsManager;
     @service notifications;
@@ -41,38 +42,38 @@ export default class TipTapEditorComponent extends Component {
     @tracked file;
 
     formatControls = [
-        { title: 'Bold', icon: 'bold', fn: this.bold },
-        { title: 'Italic', icon: 'italic', fn: this.italic },
-        { title: 'Underline', icon: 'underline', fn: this.underline },
-        { title: 'Strikethrough', icon: 'strikethrough', fn: this.strikethrough },
-        { title: 'Superscript', icon: 'superscript', fn: this.superscript },
-        { title: 'Subscript', icon: 'subscript', fn: this.subscript },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.bold'), icon: 'bold', fn: this.bold },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.italic'), icon: 'italic', fn: this.italic },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.underline'), icon: 'underline', fn: this.underline },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.strikethrough'), icon: 'strikethrough', fn: this.strikethrough },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.superscript'), icon: 'superscript', fn: this.superscript },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.subscript'), icon: 'subscript', fn: this.subscript },
     ];
 
     headingControls = [
-        { title: 'Heading 1', icon: 'heading', fn: this.heading, params: { level: 1 } },
-        { title: 'Heading 2', icon: 'heading', fn: this.heading, params: { level: 2 } },
-        { title: 'Heading 3', icon: 'heading', fn: this.heading, params: { level: 3 } },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.heading-1'), icon: 'heading', fn: this.heading, params: { level: 1 } },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.heading-2'), icon: 'heading', fn: this.heading, params: { level: 2 } },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.heading-3'), icon: 'heading', fn: this.heading, params: { level: 3 } },
     ];
 
     fontFamilyControls = [
-        { title: 'Inter', icon: 'font', fn: this.fontFamily, params: { font: 'Inter' } },
-        { title: 'Comic Sans', icon: 'font', fn: this.fontFamily, params: { font: 'Comic Sans' } },
-        { title: 'Serif', icon: 'font', fn: this.fontFamily, params: { font: 'Serif' } },
-        { title: 'Monospace', icon: 'font', fn: this.fontFamily, params: { font: 'Monospace' } },
-        { title: 'Unset', icon: 'text-slash', fn: this.unsetfontFamily, params: { font: null } },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.inter'), icon: 'font', fn: this.fontFamily, params: { font: 'Inter' } },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.comic-sans'), icon: 'font', fn: this.fontFamily, params: { font: 'Comic Sans' } },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.serif'), icon: 'font', fn: this.fontFamily, params: { font: 'Serif' } },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.monospace'), icon: 'font', fn: this.fontFamily, params: { font: 'Monospace' } },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.unset'), icon: 'text-slash', fn: this.unsetfontFamily, params: { font: null } },
     ];
 
     tableControls = [
-        { title: 'Add Column Before', icon: 'square-plus', fn: this.addTableColumnBefore },
-        { title: 'Add Column After', icon: 'square-plus', fn: this.addTableColumAfter },
-        { title: 'Delete Column', icon: 'trash', fn: this.removeTableColumn },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.add-column-before'), icon: 'square-plus', fn: this.addTableColumnBefore },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.add-column-after'), icon: 'square-plus', fn: this.addTableColumAfter },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.delete-column'), icon: 'trash', fn: this.removeTableColumn },
         { seperator: true },
-        { title: 'Add Row Before', icon: 'square-plus', fn: this.addTableRowBefore },
-        { title: 'Add Row After', icon: 'square-plus', fn: this.addTableRowAfter },
-        { title: 'Delete Row', icon: 'trash', fn: this.removeTableRow },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.add-row-before'), icon: 'square-plus', fn: this.addTableRowBefore },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.add-row-after'), icon: 'square-plus', fn: this.addTableRowAfter },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.delete-row'), icon: 'trash', fn: this.removeTableRow },
         { seperator: true },
-        { title: 'Delete Table', icon: 'trash', fn: this.removeTable },
+        { title: this.intl.t('ember-ui.js.components.tip-tap-editor.delete-table'), icon: 'trash', fn: this.removeTable },
     ];
 
     constructor(owner, { value = '', placeholder = '', autofocus = false, editable = true }) {
@@ -335,7 +336,7 @@ export default class TipTapEditorComponent extends Component {
 
     @action insertYoutube() {
         this.modalsManager.show('modals/tip-tap-editor-insert-youtube', {
-            title: 'Insert a Youtube Video',
+            title: this.intl.t('ember-ui.js.components.tip-tap-editor.insert-a-youtube-video'),
             url: undefined,
             height: 320,
             width: 480,
@@ -350,7 +351,7 @@ export default class TipTapEditorComponent extends Component {
                 });
 
                 if (inserted === false) {
-                    return this.notifications.error('Youtube video URL is invalid.');
+                    return this.notifications.error(this.intl.t('ember-ui.js.components.tip-tap-editor.youtube-video-url-is-invalid'));
                 }
 
                 modal.done();
@@ -360,7 +361,7 @@ export default class TipTapEditorComponent extends Component {
 
     @action insertTable() {
         this.modalsManager.show('modals/tip-tap-editor-insert-table', {
-            title: 'Insert a Table',
+            title: this.intl.t('ember-ui.js.components.tip-tap-editor.insert-a-table'),
             rows: 3,
             columns: 3,
             confirm: (modal) => {

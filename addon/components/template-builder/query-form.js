@@ -23,6 +23,7 @@ import { inject as service } from '@ember/service';
  * @argument {Function} onClose        - Called when the modal should close
  */
 export default class TemplateBuilderQueryFormComponent extends Component {
+    @service intl;
     @service('template-builder') templateBuilderService;
 
     // ── Scalar form fields ──────────────────────────────────────────────────
@@ -113,15 +114,15 @@ export default class TemplateBuilderQueryFormComponent extends Component {
             return serviceTypes;
         }
         return [
-            { value: 'Fleetbase\\FleetOps\\Models\\Order', label: 'Order', icon: 'box' },
-            { value: 'Fleetbase\\FleetOps\\Models\\Driver', label: 'Driver', icon: 'id-card' },
-            { value: 'Fleetbase\\FleetOps\\Models\\Place', label: 'Place', icon: 'location-dot' },
-            { value: 'Fleetbase\\FleetOps\\Models\\Vendor', label: 'Vendor', icon: 'building' },
-            { value: 'Fleetbase\\FleetOps\\Models\\Contact', label: 'Contact', icon: 'address-book' },
-            { value: 'Fleetbase\\FleetOps\\Models\\Issue', label: 'Issue', icon: 'triangle-exclamation' },
-            { value: 'Fleetbase\\FleetOps\\Models\\Vehicle', label: 'Vehicle', icon: 'truck' },
-            { value: 'Fleetbase\\FleetOps\\Models\\FuelReport', label: 'Fuel Report', icon: 'gas-pump' },
-            { value: 'Fleetbase\\FleetOps\\Models\\PurchaseRate', label: 'Purchase Rate', icon: 'receipt' },
+            { value: 'Fleetbase\\FleetOps\\Models\\Order', label: this.intl.t('ember-ui.js.components.template-builder.query-form.order'), icon: 'box' },
+            { value: 'Fleetbase\\FleetOps\\Models\\Driver', label: this.intl.t('ember-ui.js.components.template-builder.query-form.driver'), icon: 'id-card' },
+            { value: 'Fleetbase\\FleetOps\\Models\\Place', label: this.intl.t('ember-ui.js.components.template-builder.query-form.place'), icon: 'location-dot' },
+            { value: 'Fleetbase\\FleetOps\\Models\\Vendor', label: this.intl.t('ember-ui.js.components.template-builder.query-form.vendor'), icon: 'building' },
+            { value: 'Fleetbase\\FleetOps\\Models\\Contact', label: this.intl.t('ember-ui.js.components.template-builder.query-form.contact'), icon: 'address-book' },
+            { value: 'Fleetbase\\FleetOps\\Models\\Issue', label: this.intl.t('ember-ui.js.components.template-builder.query-form.issue'), icon: 'triangle-exclamation' },
+            { value: 'Fleetbase\\FleetOps\\Models\\Vehicle', label: this.intl.t('ember-ui.js.components.template-builder.query-form.vehicle'), icon: 'truck' },
+            { value: 'Fleetbase\\FleetOps\\Models\\FuelReport', label: this.intl.t('ember-ui.js.components.template-builder.query-form.fuel-report'), icon: 'gas-pump' },
+            { value: 'Fleetbase\\FleetOps\\Models\\PurchaseRate', label: this.intl.t('ember-ui.js.components.template-builder.query-form.purchase-rate'), icon: 'receipt' },
         ];
     }
 
@@ -145,18 +146,18 @@ export default class TemplateBuilderQueryFormComponent extends Component {
 
     get conditionOperators() {
         return [
-            { value: '=', label: '= equals' },
-            { value: '!=', label: '≠ not equals' },
-            { value: '>', label: '> greater than' },
-            { value: '>=', label: '≥ greater or equal' },
-            { value: '<', label: '< less than' },
-            { value: '<=', label: '≤ less or equal' },
-            { value: 'like', label: '~ contains' },
-            { value: 'not like', label: '!~ not contains' },
-            { value: 'in', label: 'in list' },
-            { value: 'not in', label: 'not in list' },
-            { value: 'null', label: 'is null' },
-            { value: 'not null', label: 'is not null' },
+            { value: '=', label: this.intl.t('ember-ui.js.components.template-builder.query-form.equals') },
+            { value: '!=', label: this.intl.t('ember-ui.js.components.template-builder.query-form.not-equals') },
+            { value: '>', label: this.intl.t('ember-ui.js.components.template-builder.query-form.greater-than') },
+            { value: '>=', label: this.intl.t('ember-ui.js.components.template-builder.query-form.greater-or-equal') },
+            { value: '<', label: this.intl.t('ember-ui.js.components.template-builder.query-form.less-than') },
+            { value: '<=', label: this.intl.t('ember-ui.js.components.template-builder.query-form.less-or-equal') },
+            { value: 'like', label: this.intl.t('ember-ui.js.components.template-builder.query-form.contains') },
+            { value: 'not like', label: this.intl.t('ember-ui.js.components.template-builder.query-form.not-contains') },
+            { value: 'in', label: this.intl.t('ember-ui.js.components.template-builder.query-form.in-list') },
+            { value: 'not in', label: this.intl.t('ember-ui.js.components.template-builder.query-form.not-in-list') },
+            { value: 'null', label: this.intl.t('ember-ui.js.components.template-builder.query-form.is-null') },
+            { value: 'not null', label: this.intl.t('ember-ui.js.components.template-builder.query-form.is-not-null') },
         ];
     }
 

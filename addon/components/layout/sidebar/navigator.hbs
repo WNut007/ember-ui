@@ -14,14 +14,14 @@
             <input
                 type="search"
                 value={{this.query}}
-                placeholder={{or @searchPlaceholder "Search or jump to..."}}
-                aria-label={{or @searchLabel "Search navigation"}}
+                placeholder={{or @searchPlaceholder (t "ember-ui.components.layout.sidebar.navigator.search-or-jump-to")}}
+                aria-label={{or @searchLabel (t "ember-ui.components.layout.sidebar.navigator.search-navigation")}}
                 {{did-insert this.registerSearchInput}}
                 {{on "focus" this.openSearch}}
                 {{on "input" this.updateQuery}}
             />
             {{#if this.hasQuery}}
-                <button type="button" class="next-sidebar-navigator-search-clear" aria-label="Clear search" {{on "click" this.clearQuery}}>
+                <button type="button" class="next-sidebar-navigator-search-clear" aria-label={{t "ember-ui.components.layout.sidebar.navigator.clear-search"}} {{on "click" this.clearQuery}}>
                     <FaIcon @icon="times" @size="xs" />
                 </button>
             {{else if this.searchShortcutEnabled}}
@@ -31,12 +31,12 @@
 
         {{#if (and this.hasSearchPopover this.popoverTarget)}}
             {{#in-element this.popoverTarget insertBefore=null}}
-                <button type="button" class={{this.searchOverlayClass}} aria-label="Close search" {{on "click" this.closeSearch}}></button>
+                <button type="button" class={{this.searchOverlayClass}} aria-label={{t "ember-ui.components.layout.sidebar.navigator.close-search"}} {{on "click" this.closeSearch}}></button>
 
                 <div
                     class={{this.searchPopoverClass}}
                     role="dialog"
-                    aria-label="Navigation search results"
+                    aria-label={{t "ember-ui.components.layout.sidebar.navigator.navigation-search-results"}}
                     style={{this.popoverStyle}}
                     {{on "keydown" this.handleSearchPanelKeydown}}
                 >
@@ -45,19 +45,29 @@
                         <input
                             type="search"
                             value={{this.query}}
-                            placeholder={{or @searchPlaceholder "Search or jump to..."}}
-                            aria-label={{or @searchLabel "Search navigation"}}
+                            placeholder={{or @searchPlaceholder (t "ember-ui.components.layout.sidebar.navigator.search-or-jump-to")}}
+                            aria-label={{or @searchLabel (t "ember-ui.components.layout.sidebar.navigator.search-navigation")}}
                             {{did-insert this.registerPortalSearchInput}}
                             {{on "input" this.updateQuery}}
                         />
                         {{#if this.hasQuery}}
-                            <button type="button" class="next-sidebar-navigator-search-clear" aria-label="Clear search" {{on "click" this.clearQuery}}>
+                            <button
+                                type="button"
+                                class="next-sidebar-navigator-search-clear"
+                                aria-label={{t "ember-ui.components.layout.sidebar.navigator.clear-search"}}
+                                {{on "click" this.clearQuery}}
+                            >
                                 <FaIcon @icon="times" @size="xs" />
                             </button>
                         {{else}}
-                            <span class="next-sidebar-navigator-kbd">Esc</span>
+                            <span class="next-sidebar-navigator-kbd">{{t "ember-ui.components.layout.sidebar.navigator.esc"}}</span>
                         {{/if}}
-                        <button type="button" class="next-sidebar-navigator-search-close" aria-label="Close search" {{on "click" this.closeSearch}}>
+                        <button
+                            type="button"
+                            class="next-sidebar-navigator-search-close"
+                            aria-label={{t "ember-ui.components.layout.sidebar.navigator.close-search"}}
+                            {{on "click" this.closeSearch}}
+                        >
                             <FaIcon @icon="times" @size="xs" />
                         </button>
                     </div>
@@ -65,12 +75,12 @@
                     {{#if this.isSearching}}
                         <div class="next-sidebar-navigator-search-status">
                             <FaIcon @icon="spinner" @spin={{true}} />
-                            <span>Searching...</span>
+                            <span>{{t "ember-ui.components.layout.sidebar.navigator.searching"}}</span>
                         </div>
                     {{else if this.emptySearch}}
                         <div class="next-sidebar-navigator-search-status">
                             <FaIcon @icon="magnifying-glass" />
-                            <span>No navigation results found.</span>
+                            <span>{{t "ember-ui.components.layout.sidebar.navigator.no-navigation-results-found"}}</span>
                         </div>
                     {{else if this.hasQuery}}
                         <div class="next-sidebar-navigator-search-results" {{did-insert this.registerSearchResults}}>
@@ -113,7 +123,7 @@
                     {{else}}
                         <div class="next-sidebar-navigator-search-status">
                             <FaIcon @icon="keyboard" />
-                            <span>Start typing to search</span>
+                            <span>{{t "ember-ui.components.layout.sidebar.navigator.start-typing-to-search"}}</span>
                         </div>
                     {{/if}}
                 </div>
@@ -125,8 +135,8 @@
         class="next-sidebar-navigator-viewport {{if this.isNested 'is-nested'}} {{if this.outgoingView 'is-transitioning'}} is-{{this.transitionDirection}}"
         {{did-insert this.registerViewport}}
     >
-        {{!-- An "if" block does not yield block params — only "let" does — so the outgoing
-            menu must be bound with "let" and then tested for presence. --}}
+        {{! An "if" block does not yield block params — only "let" does — so the outgoing
+            menu must be bound with "let" and then tested for presence. }}
         {{#let this.outgoingView as |outgoing|}}
             {{#if outgoing}}
                 <div class="next-sidebar-navigator-view next-sidebar-navigator-view-out">
@@ -142,7 +152,10 @@
                     {{#each outgoing.items as |item|}}
                         <button
                             type="button"
-                            class="next-sidebar-navigator-item {{if (this.isActive item) 'is-active'}} {{if (this.isParentActive item) 'is-parent-active'}} {{if (this.itemDescriptionVisible item) 'has-description'}}"
+                            class="next-sidebar-navigator-item
+                                {{if (this.isActive item) 'is-active'}}
+                                {{if (this.isParentActive item) 'is-parent-active'}}
+                                {{if (this.itemDescriptionVisible item) 'has-description'}}"
                             aria-current={{if (this.isActive item) "page"}}
                             title={{this.tooltipFor item}}
                         >
@@ -184,7 +197,10 @@
             {{#each this.currentItems as |item|}}
                 <button
                     type="button"
-                    class="next-sidebar-navigator-item {{if (this.isActive item) 'is-active'}} {{if (this.isParentActive item) 'is-parent-active'}} {{if (this.itemDescriptionVisible item) 'has-description'}}"
+                    class="next-sidebar-navigator-item
+                        {{if (this.isActive item) 'is-active'}}
+                        {{if (this.isParentActive item) 'is-parent-active'}}
+                        {{if (this.itemDescriptionVisible item) 'has-description'}}"
                     aria-current={{if (this.isActive item) "page"}}
                     title={{this.tooltipFor item}}
                     {{on "click" (fn this.openItem item)}}

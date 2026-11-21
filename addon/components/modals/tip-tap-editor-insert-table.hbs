@@ -1,8 +1,18 @@
 <Modal::Default @modalIsOpened={{@modalIsOpened}} @options={{@options}} @confirm={{@onConfirm}} @decline={{@onDecline}}>
     <div class="modal-body-container">
         <div class="mt-2 grid grid-cols-2 gap-2">
-            <InputGroup @name="Rows" @value={{@options.rows}} @helpText="The number of rows for the table" @inputClass="input-lg" />
-            <InputGroup @name="Columns" @value={{@options.columns}} @helpText="The number of columns for the table" @inputClass="input-lg" />
+            <InputGroup
+                @name={{t "ember-ui.components.modals.tip-tap-editor-insert-table.rows"}}
+                @value={{@options.rows}}
+                @helpText={{t "ember-ui.components.modals.tip-tap-editor-insert-table.the-number-of-rows-for-the"}}
+                @inputClass="input-lg"
+            />
+            <InputGroup
+                @name={{t "ember-ui.components.modals.tip-tap-editor-insert-table.columns"}}
+                @value={{@options.columns}}
+                @helpText={{t "ember-ui.components.modals.tip-tap-editor-insert-table.the-number-of-columns-for-the"}}
+                @inputClass="input-lg"
+            />
         </div>
     </div>
 </Modal::Default>

@@ -81,6 +81,7 @@ class MetadataRow {
 }
 
 export default class MetadataEditorComponent extends Component {
+    @service intl;
     @service modalsManager;
     /* istanbul ignore next -- the constructor assigns this before anything reads it */
     @tracked rows = [];
@@ -228,9 +229,9 @@ export default class MetadataEditorComponent extends Component {
 
     @action preview() {
         this.modalsManager.show('modals/view-raw-metadata', {
-            title: 'Preview metadata',
+            title: this.intl.t('ember-ui.js.components.metadata-editor.preview-metadata'),
             metadata: this.getOutput(),
-            acceptButtonText: 'Done',
+            acceptButtonText: this.intl.t('ember-ui.js.components.metadata-editor.done'),
             hideDeclineButton: true,
         });
     }

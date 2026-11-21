@@ -15,7 +15,7 @@
                 {{#if @disableHumanize}}
                     {{or @text @status}}
                 {{else}}
-                    {{safe-humanize (or @text @status)}}
+                    {{this.displayText}}
                 {{/if}}
             {{/unless}}
         {{/if}}

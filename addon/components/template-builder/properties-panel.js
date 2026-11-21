@@ -119,6 +119,7 @@ function humanizeKey(key) {
  * @argument {Function} onOpenVariablePicker - Called to open the variable picker modal
  */
 export default class TemplateBuilderPropertiesPanelComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
 
@@ -246,26 +247,26 @@ export default class TemplateBuilderPropertiesPanelComponent extends Component {
 
     get fontWeightOptions() {
         return [
-            { value: '300', label: 'Light' },
-            { value: '400', label: 'Regular' },
-            { value: '500', label: 'Medium' },
-            { value: '600', label: 'Semi Bold' },
-            { value: '700', label: 'Bold' },
-            { value: '800', label: 'Extra Bold' },
-            { value: '900', label: 'Black' },
+            { value: '300', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.light') },
+            { value: '400', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.regular') },
+            { value: '500', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.medium') },
+            { value: '600', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.semi-bold') },
+            { value: '700', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.bold') },
+            { value: '800', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.extra-bold') },
+            { value: '900', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.black') },
         ];
     }
 
     get fontFamilyOptions() {
         return [
-            { value: 'Inter, sans-serif', label: 'Inter' },
-            { value: 'Arial, sans-serif', label: 'Arial' },
-            { value: 'Helvetica, sans-serif', label: 'Helvetica' },
-            { value: 'Georgia, serif', label: 'Georgia' },
-            { value: 'Times New Roman, serif', label: 'Times New Roman' },
-            { value: 'Courier New, monospace', label: 'Courier New' },
-            { value: 'Roboto, sans-serif', label: 'Roboto' },
-            { value: 'Open Sans, sans-serif', label: 'Open Sans' },
+            { value: 'Inter, sans-serif', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.inter') },
+            { value: 'Arial, sans-serif', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.arial') },
+            { value: 'Helvetica, sans-serif', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.helvetica') },
+            { value: 'Georgia, serif', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.georgia') },
+            { value: 'Times New Roman, serif', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.times-new-roman') },
+            { value: 'Courier New, monospace', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.courier-new') },
+            { value: 'Roboto, sans-serif', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.roboto') },
+            { value: 'Open Sans, sans-serif', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.open-sans') },
         ];
     }
 
@@ -280,18 +281,18 @@ export default class TemplateBuilderPropertiesPanelComponent extends Component {
 
     get lineStyleOptions() {
         return [
-            { value: 'solid', label: 'Solid' },
-            { value: 'dashed', label: 'Dashed' },
-            { value: 'dotted', label: 'Dotted' },
+            { value: 'solid', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.solid') },
+            { value: 'dashed', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.dashed') },
+            { value: 'dotted', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.dotted') },
         ];
     }
 
     get objectFitOptions() {
         return [
-            { value: 'cover', label: 'Cover' },
-            { value: 'contain', label: 'Contain' },
-            { value: 'fill', label: 'Fill' },
-            { value: 'none', label: 'None' },
+            { value: 'cover', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.cover') },
+            { value: 'contain', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.contain') },
+            { value: 'fill', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.fill') },
+            { value: 'none', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.none') },
         ];
     }
 
@@ -637,26 +638,26 @@ export default class TemplateBuilderPropertiesPanelComponent extends Component {
 
     get shapeOptions() {
         return [
-            { value: 'rectangle', label: 'Rectangle' },
-            { value: 'circle', label: 'Circle' },
+            { value: 'rectangle', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.rectangle') },
+            { value: 'circle', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.circle') },
         ];
     }
 
     get paperSizeOptions() {
         return [
-            { value: 'A4', label: 'A4 (210 × 297 mm)' },
-            { value: 'A3', label: 'A3 (297 × 420 mm)' },
-            { value: 'A5', label: 'A5 (148 × 210 mm)' },
-            { value: 'Letter', label: 'Letter (216 × 279 mm)' },
-            { value: 'Legal', label: 'Legal (216 × 356 mm)' },
-            { value: 'custom', label: 'Custom' },
+            { value: 'A4', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.a4-210-297-mm') },
+            { value: 'A3', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.a3-297-420-mm') },
+            { value: 'A5', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.a5-148-210-mm') },
+            { value: 'Letter', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.letter-216-279-mm') },
+            { value: 'Legal', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.legal-216-356-mm') },
+            { value: 'custom', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.custom') },
         ];
     }
 
     get orientationOptions() {
         return [
-            { value: 'portrait', label: 'Portrait' },
-            { value: 'landscape', label: 'Landscape' },
+            { value: 'portrait', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.portrait') },
+            { value: 'landscape', label: this.intl.t('ember-ui.js.components.template-builder.properties-panel.landscape') },
         ];
     }
 }

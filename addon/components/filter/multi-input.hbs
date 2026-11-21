@@ -1,7 +1,7 @@
 <div class="filter-multi-input" ...attributes>
     <TagInput
         class="form-input form-input-sm flex-1"
-        @placeholder={{or @placeholder "Add values..."}}
+        @placeholder={{or @placeholder (t "ember-ui.components.filter.multi-input.add-values")}}
         @allowSpacesInTags={{if (is-empty @allowSpacesInTags) true @allowSpacesInTags}}
         @tags={{this.tags}}
         @addTag={{this.addTag}}
@@ -10,7 +10,7 @@
     >
         {{tag}}
     </TagInput>
-    <button type="button" class="clear-button" disabled={{not this.tags.length}} alt="Clear" {{on "click" this.clear}}>
+    <button type="button" class="clear-button" disabled={{not this.tags.length}} alt={{t "ember-ui.components.filter.multi-input.clear"}} {{on "click" this.clear}}>
         <FaIcon @icon="times" />
     </button>
 </div>

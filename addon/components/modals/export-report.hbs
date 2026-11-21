@@ -2,14 +2,18 @@
     <div class="modal-body-container">
         <div class="mb-4">
             <p class="text-sm text-gray-600 dark:text-gray-300">
-                Export
-                {{@options.rowCount}}
-                rows of data in your preferred format.
+                {{t "ember-ui.components.modals.export-report.export-rows-of-data-in-your" rowCount=@options.rowCount}}
             </p>
         </div>
 
-        <InputGroup @name="Export Format" @required={{true}}>
-            <Select @value={{@options.format}} @options={{@options.formatOptions}} @placeholder="Select export format..." @onChange={{@options.setFormat}} class="form-input" />
+        <InputGroup @name={{t "ember-ui.components.modals.export-report.export-format"}} @required={{true}}>
+            <Select
+                @value={{@options.format}}
+                @options={{@options.formatOptions}}
+                @placeholder={{t "ember-ui.components.modals.export-report.select-export-format"}}
+                @onChange={{@options.setFormat}}
+                class="form-input"
+            />
         </InputGroup>
 
         {{#if (eq @options.format "csv")}}
@@ -17,8 +21,8 @@
                 <div class="flex items-start">
                     <FaIcon @icon="info-circle" class="text-blue-500 mt-0.5 mr-2" />
                     <div class="text-sm text-blue-700 dark:text-blue-300">
-                        <p class="font-medium">CSV Export Options</p>
-                        <p>Data will be exported as comma-separated values, suitable for Excel and other spreadsheet applications.</p>
+                        <p class="font-medium">{{t "ember-ui.components.modals.export-report.csv-export-options"}}</p>
+                        <p>{{t "ember-ui.components.modals.export-report.data-will-be-exported-as-comma"}}</p>
                     </div>
                 </div>
             </div>
@@ -29,17 +33,17 @@
                 <div class="flex items-start">
                     <FaIcon @icon="info-circle" class="text-green-500 mt-0.5 mr-2" />
                     <div class="text-sm text-green-700 dark:text-green-300">
-                        <p class="font-medium">JSON Export Options</p>
-                        <p>Data will be exported as structured JSON, suitable for API consumption and data processing.</p>
+                        <p class="font-medium">{{t "ember-ui.components.modals.export-report.json-export-options"}}</p>
+                        <p>{{t "ember-ui.components.modals.export-report.data-will-be-exported-as-structured"}}</p>
                     </div>
                 </div>
             </div>
         {{/if}}
 
-        <InputGroup @name="File Name">
+        <InputGroup @name={{t "ember-ui.components.modals.export-report.file-name"}}>
             <Input @value={{@options.fileName}} placeholder="report-export" class="form-input" />
             <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                File extension will be added automatically
+                {{t "ember-ui.components.modals.export-report.file-extension-will-be-added-automatically"}}
             </div>
         </InputGroup>
     </div>

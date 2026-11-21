@@ -6,6 +6,7 @@ import { later } from '@ember/runloop';
 import { task } from 'ember-concurrency';
 
 export default class ChatWindowComponent extends Component {
+    @service intl;
     @service chat;
     @service socket;
     @service currentUser;
@@ -185,8 +186,8 @@ export default class ChatWindowComponent extends Component {
 
     @action editChatName() {
         this.modalsManager.show('modals/edit-chat-name', {
-            title: 'Edit chat channel name',
-            acceptButtonText: 'Save Changes',
+            title: this.intl.t('ember-ui.js.components.chat-window.edit-chat-channel-name'),
+            acceptButtonText: this.intl.t('ember-ui.js.components.chat-window.save-changes'),
             acceptButtonIcon: 'save',
             channelName: this.channel.name,
             confirm: (modal) => {
@@ -195,7 +196,7 @@ export default class ChatWindowComponent extends Component {
                     return this.chat.updateChatChannel(this.channel, { name: modal.getOption('channelName') });
                 }
 
-                this.notifications.warning('Name required to save changes.');
+                this.notifications.warning(this.intl.t('ember-ui.js.components.chat-window.name-required-to-save-changes'));
             },
         });
     }

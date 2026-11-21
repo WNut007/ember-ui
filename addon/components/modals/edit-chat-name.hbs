@@ -1,5 +1,11 @@
 <Modal::Default @modalIsOpened={{@modalIsOpened}} @options={{@options}} @confirm={{@onConfirm}} @decline={{@onDecline}}>
     <div class="modal-body-container">
-        <InputGroup @type="text" @name="Channel Name" @value={{@options.channelName}} @helpText="Input a new name for your chat channel." @inputClass="input-lg" />
+        <InputGroup
+            @type="text"
+            @name={{t "ember-ui.components.modals.edit-chat-name.channel-name"}}
+            @value={{@options.channelName}}
+            @helpText={{t "ember-ui.components.modals.edit-chat-name.input-a-new-name-for-your"}}
+            @inputClass="input-lg"
+        />
     </div>
 </Modal::Default>

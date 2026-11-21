@@ -60,6 +60,7 @@ import { next } from '@ember/runloop';
  * @argument {String}   [closeLabel]    - Text label beside the close icon (default: none — icon only)
  */
 export default class TemplateBuilderComponent extends Component {
+    @service intl;
     @service fetch;
     @service notifications;
 
@@ -165,7 +166,7 @@ export default class TemplateBuilderComponent extends Component {
 
         const queriesSchema = {
             namespace: '__queries__',
-            label: 'Queries',
+            label: this.intl.t('ember-ui.js.components.template-builder.queries'),
             icon: 'database',
             variables: this.queries.map((q) => ({
                 path: q.variable_name,

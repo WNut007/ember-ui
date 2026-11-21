@@ -1,8 +1,10 @@
 import Service from '@ember/service';
+import formatMessage, { hasMessage } from '../utils/format-message';
 
 /**
- * Stub of the host console's `intl` service. `t(key)` echoes the key back,
- * matching the dummy app's `t` helper (tests/dummy/app/helpers/t.js).
+ * Stub of the host console's `intl` service. `t(key)` echoes the key back, except
+ * `ember-ui.*` keys, which return their English text (utils/ember-ui-messages.js).
+ * Matches the dummy app's `t` helper (tests/dummy/app/helpers/t.js).
  */
 export default class IntlService extends Service {
     calls = [];
@@ -15,12 +17,12 @@ export default class IntlService extends Service {
 
     t(key, options) {
         this.calls.push({ method: 't', args: [key, options] });
-        return key;
+        return formatMessage(key, options);
     }
 
     exists(key) {
         this.calls.push({ method: 'exists', args: [key] });
-        return true;
+        return typeof key === 'string' && key.startsWith('ember-ui.') ? hasMessage(key) : true;
     }
 
     setLocale(locale) {

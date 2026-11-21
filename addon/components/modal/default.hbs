@@ -43,7 +43,7 @@
                         @size={{or @options.buttonSize "md"}}
                         @icon={{or @options.declineButtonIcon "times"}}
                         @iconPrefix={{@options.declineButtonIconPrefix}}
-                        @text={{or @options.declineButtonText "Cancel"}}
+                        @text={{or @options.declineButtonText (t "ember-ui.components.modal.default.cancel")}}
                         @onClick={{modal.close}}
                         @disabled={{or @options.declineButtonDisabled @options.isLoading}}
                     />
@@ -138,7 +138,7 @@
                         @icon={{or @options.acceptButtonIcon "check"}}
                         @iconPrefix={{@options.acceptButtonIconPrefix}}
                         @isLoading={{@options.isLoading}}
-                        @text={{or @options.acceptButtonText "Confirm"}}
+                        @text={{or @options.acceptButtonText (t "ember-ui.components.modal.default.confirm")}}
                         @onClick={{modal.submit}}
                         @disabled={{or @options.acceptButtonDisabled @options.isLoading}}
                     />

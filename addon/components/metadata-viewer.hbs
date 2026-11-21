@@ -5,10 +5,10 @@
                 <div class="text-center">
                     <FaIcon @icon="table" @size="2x" class="text-gray-400 mb-2" />
                     <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                        No metadata
+                        {{t "ember-ui.components.metadata-viewer.no-metadata"}}
                     </div>
                     <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                        No metadata to display
+                        {{t "ember-ui.components.metadata-viewer.no-metadata-to-display"}}
                     </div>
                 </div>
             </div>
@@ -18,8 +18,8 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Key</th>
-                        <th>Value</th>
+                        <th>{{t "ember-ui.components.metadata-viewer.key"}}</th>
+                        <th>{{t "ember-ui.components.metadata-viewer.value"}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,8 +27,8 @@
                         <tr>
                             <td>{{key}}</td>
                             <td>
-                                {{!-- `value` is the each-in block param; `@value` is a component
-                                    argument this component never receives. --}}
+                                {{! `value` is the each-in block param; `@value` is a component
+                                    argument this component never receives. }}
                                 {{#if (or (is-array value) (is-object value))}}
                                     {{format-json value}}
                                 {{else}}
@@ -41,7 +41,11 @@
             </table>
         </div>
         <div class="px-3 mt-2">
-            <Button @text={{if this.displayRaw "Hide raw metadata" "View raw metadata"}} @onClick={{this.viewRaw}} @size="xs" />
+            <Button
+                @text={{if this.displayRaw (t "ember-ui.components.metadata-viewer.hide-raw-metadata") (t "ember-ui.components.metadata-viewer.view-raw-metadata")}}
+                @onClick={{this.viewRaw}}
+                @size="xs"
+            />
             {{#if this.displayRaw}}
                 <div class="my-2">
                     <div class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded p-2 dark:text-gray-300 text-gray-700 font-mono text-sm">

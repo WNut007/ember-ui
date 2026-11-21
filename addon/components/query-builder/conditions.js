@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -5,6 +6,7 @@ import { isArray } from '@ember/array';
 import { task, timeout } from 'ember-concurrency';
 
 export default class QueryBuilderConditionsComponent extends Component {
+    @service intl;
     /* istanbul ignore next -- the constructor calls initializeConditionGroups(), which assigns this field on both of its paths before anything reads it, so the lazy initializer never runs */
     @tracked conditionGroups = [];
 
@@ -106,48 +108,48 @@ export default class QueryBuilderConditionsComponent extends Component {
 
     get booleanOptions() {
         return [
-            { value: true, label: 'True' },
-            { value: false, label: 'False' },
+            { value: true, label: this.intl.t('ember-ui.js.components.query-builder.conditions.true') },
+            { value: false, label: this.intl.t('ember-ui.js.components.query-builder.conditions.false') },
         ];
     }
 
-    getOperatorsForField(field) {
+    @action getOperatorsForField(field) {
         if (!field) return [];
 
         const baseOperators = [
-            { value: '=', label: 'equals', icon: 'equals' },
-            { value: '!=', label: 'not equals', icon: 'not-equal' },
-            { value: 'is_null', label: 'is empty', icon: 'ban' },
-            { value: 'is_not_null', label: 'is not empty', icon: 'check' },
+            { value: '=', label: this.intl.t('ember-ui.js.components.query-builder.conditions.equals'), icon: 'equals' },
+            { value: '!=', label: this.intl.t('ember-ui.js.components.query-builder.conditions.not-equals'), icon: 'not-equal' },
+            { value: 'is_null', label: this.intl.t('ember-ui.js.components.query-builder.conditions.is-empty'), icon: 'ban' },
+            { value: 'is_not_null', label: this.intl.t('ember-ui.js.components.query-builder.conditions.is-not-empty'), icon: 'check' },
         ];
 
         const stringOperators = [
-            { value: 'like', label: 'contains', icon: 'search' },
-            { value: 'not_like', label: 'does not contain', icon: 'search-minus' },
-            { value: 'starts_with', label: 'starts with', icon: 'arrow-right' },
-            { value: 'ends_with', label: 'ends with', icon: 'arrow-left' },
-            { value: 'in', label: 'is one of', icon: 'list' },
-            { value: 'not_in', label: 'is not one of', icon: 'list-slash' },
+            { value: 'like', label: this.intl.t('ember-ui.js.components.query-builder.conditions.contains'), icon: 'search' },
+            { value: 'not_like', label: this.intl.t('ember-ui.js.components.query-builder.conditions.does-not-contain'), icon: 'search-minus' },
+            { value: 'starts_with', label: this.intl.t('ember-ui.js.components.query-builder.conditions.starts-with'), icon: 'arrow-right' },
+            { value: 'ends_with', label: this.intl.t('ember-ui.js.components.query-builder.conditions.ends-with'), icon: 'arrow-left' },
+            { value: 'in', label: this.intl.t('ember-ui.js.components.query-builder.conditions.is-one-of'), icon: 'list' },
+            { value: 'not_in', label: this.intl.t('ember-ui.js.components.query-builder.conditions.is-not-one-of'), icon: 'list-slash' },
         ];
 
         const numberOperators = [
-            { value: '>', label: 'greater than', icon: 'greater-than' },
-            { value: '<', label: 'less than', icon: 'less-than' },
-            { value: '>=', label: 'greater than or equal', icon: 'greater-than-equal' },
-            { value: '<=', label: 'less than or equal', icon: 'less-than-equal' },
-            { value: 'between', label: 'between', icon: 'arrows-left-right' },
-            { value: 'not_between', label: 'not between', icon: 'arrows-left-right-slash' },
-            { value: 'in', label: 'is one of', icon: 'list' },
-            { value: 'not_in', label: 'is not one of', icon: 'list-slash' },
+            { value: '>', label: this.intl.t('ember-ui.js.components.query-builder.conditions.greater-than'), icon: 'greater-than' },
+            { value: '<', label: this.intl.t('ember-ui.js.components.query-builder.conditions.less-than'), icon: 'less-than' },
+            { value: '>=', label: this.intl.t('ember-ui.js.components.query-builder.conditions.greater-than-or-equal'), icon: 'greater-than-equal' },
+            { value: '<=', label: this.intl.t('ember-ui.js.components.query-builder.conditions.less-than-or-equal'), icon: 'less-than-equal' },
+            { value: 'between', label: this.intl.t('ember-ui.js.components.query-builder.conditions.between'), icon: 'arrows-left-right' },
+            { value: 'not_between', label: this.intl.t('ember-ui.js.components.query-builder.conditions.not-between'), icon: 'arrows-left-right-slash' },
+            { value: 'in', label: this.intl.t('ember-ui.js.components.query-builder.conditions.is-one-of'), icon: 'list' },
+            { value: 'not_in', label: this.intl.t('ember-ui.js.components.query-builder.conditions.is-not-one-of'), icon: 'list-slash' },
         ];
 
         const dateOperators = [
-            { value: '>', label: 'after', icon: 'calendar-plus' },
-            { value: '<', label: 'before', icon: 'calendar-minus' },
-            { value: '>=', label: 'on or after', icon: 'calendar-check' },
-            { value: '<=', label: 'on or before', icon: 'calendar-xmark' },
-            { value: 'between', label: 'between dates', icon: 'calendar-range' },
-            { value: 'not_between', label: 'not between dates', icon: 'calendar-range-slash' },
+            { value: '>', label: this.intl.t('ember-ui.js.components.query-builder.conditions.after'), icon: 'calendar-plus' },
+            { value: '<', label: this.intl.t('ember-ui.js.components.query-builder.conditions.before'), icon: 'calendar-minus' },
+            { value: '>=', label: this.intl.t('ember-ui.js.components.query-builder.conditions.on-or-after'), icon: 'calendar-check' },
+            { value: '<=', label: this.intl.t('ember-ui.js.components.query-builder.conditions.on-or-before'), icon: 'calendar-xmark' },
+            { value: 'between', label: this.intl.t('ember-ui.js.components.query-builder.conditions.between-dates'), icon: 'calendar-range' },
+            { value: 'not_between', label: this.intl.t('ember-ui.js.components.query-builder.conditions.not-between-dates'), icon: 'calendar-range-slash' },
         ];
 
         switch (field.type) {

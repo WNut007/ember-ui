@@ -1,4 +1,5 @@
 import { helper } from '@ember/component/helper';
+import formatMessage from 'dummy/utils/format-message';
 import Service from '@ember/service';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'dummy/tests/helpers';
@@ -36,7 +37,7 @@ module('Integration | Component | activity-log', function (hooks) {
         this.owner.register('service:store', StoreStub);
         this.owner.register(
             'helper:t',
-            helper(([key]) => translations[key] ?? key)
+            helper(([key], named) => translations[key] ?? formatMessage(key, named))
         );
     });
 

@@ -21,8 +21,8 @@
 
             {{#if (and @viewMode group.isEditing)}}
                 <div class="mt-2 space-x-1">
-                    <Button @type="primary" @icon="save" @text="Save Changes" @size="xs" @onClick={{fn this.groupSaveHandler group}} />
-                    <Button @icon="times" @text="Cancel" @size="xs" @onClick={{fn this.cancelEditing group}} />
+                    <Button @type="primary" @icon="save" @text={{t "ember-ui.components.custom-field.yield.save-changes"}} @size="xs" @onClick={{fn this.groupSaveHandler group}} />
+                    <Button @icon="times" @text={{t "ember-ui.components.custom-field.yield.cancel"}} @size="xs" @onClick={{fn this.cancelEditing group}} />
                 </div>
             {{/if}}
         </ContentPanel>

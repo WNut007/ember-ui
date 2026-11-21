@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -14,6 +15,7 @@ const columnKey = (column) => column.full ?? column.name;
 const isSummaryColumn = (column) => column.aggregate === true;
 
 export default class QueryBuilderGroupByComponent extends Component {
+    @service intl;
     @tracked selectedGroupBy = null;
     @tracked selectedAggregateFn = null;
     @tracked selectedAggregateBy = null;
@@ -27,13 +29,13 @@ export default class QueryBuilderGroupByComponent extends Component {
 
     get aggregateFunctions() {
         return [
-            { value: 'count', label: 'Count', icon: 'hashtag' },
-            { value: 'count_distinct', label: 'Count Distinct', icon: 'fingerprint' },
-            { value: 'sum', label: 'Sum', icon: 'plus' },
-            { value: 'avg', label: 'Average', icon: 'chart-line' },
-            { value: 'min', label: 'Minimum', icon: 'arrow-down' },
-            { value: 'max', label: 'Maximum', icon: 'arrow-up' },
-            { value: 'group_concat', label: 'Concatenate', icon: 'link' },
+            { value: 'count', label: this.intl.t('ember-ui.js.components.query-builder.group-by.count'), icon: 'hashtag' },
+            { value: 'count_distinct', label: this.intl.t('ember-ui.js.components.query-builder.group-by.count-distinct'), icon: 'fingerprint' },
+            { value: 'sum', label: this.intl.t('ember-ui.js.components.query-builder.group-by.sum'), icon: 'plus' },
+            { value: 'avg', label: this.intl.t('ember-ui.js.components.query-builder.group-by.average'), icon: 'chart-line' },
+            { value: 'min', label: this.intl.t('ember-ui.js.components.query-builder.group-by.minimum'), icon: 'arrow-down' },
+            { value: 'max', label: this.intl.t('ember-ui.js.components.query-builder.group-by.maximum'), icon: 'arrow-up' },
+            { value: 'group_concat', label: this.intl.t('ember-ui.js.components.query-builder.group-by.concatenate'), icon: 'link' },
         ];
     }
 
@@ -72,7 +74,7 @@ export default class QueryBuilderGroupByComponent extends Component {
         const fn = this.selectedAggregateFn.value;
 
         if (fn === 'count') {
-            return [{ name: '*', label: 'All Records', type: 'count', full: '*' }, ...columnsToUse];
+            return [{ name: '*', label: this.intl.t('ember-ui.js.components.query-builder.group-by.all-records'), type: 'count', full: '*' }, ...columnsToUse];
         }
 
         if (fn === 'count_distinct') {
@@ -157,7 +159,7 @@ export default class QueryBuilderGroupByComponent extends Component {
         this.selectedAggregateFn = fn;
         // Optional UX: auto-select "*" when choosing COUNT
         if (fn?.value === 'count') {
-            this.selectedAggregateBy = { name: '*', label: 'All Records', type: 'count', full: '*' };
+            this.selectedAggregateBy = { name: '*', label: this.intl.t('ember-ui.js.components.query-builder.group-by.all-records'), type: 'count', full: '*' };
         } else {
             this.selectedAggregateBy = null;
         }

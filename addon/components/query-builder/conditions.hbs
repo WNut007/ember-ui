@@ -4,10 +4,10 @@
     <div class="query-builder-panel-header">
         <div class="query-builder-panel-title">
             <FaIcon @icon="filter" @size="sm" class="mr-2" />
-            Conditions
+            {{t "ember-ui.components.query-builder.conditions.conditions"}}
         </div>
         <div class="text-xs text-gray-500">
-            {{if this.hasConditions this.conditionsSummary "No conditions"}}
+            {{if this.hasConditions this.conditionsSummary (t "ember-ui.components.query-builder.conditions.no-conditions")}}
         </div>
     </div>
 
@@ -33,7 +33,7 @@
                                         <div class="group-bracket">(</div>
                                     {{/if}}
                                     <span class="text-xs font-medium text-gray-700 dark:text-gray-300">
-                                        {{if group.isNested "Group" "Conditions"}}
+                                        {{if group.isNested (t "ember-ui.components.query-builder.conditions.group") (t "ember-ui.components.query-builder.conditions.conditions")}}
                                     </span>
                                     {{#if (gt groupIndex 0)}}
                                         <Select
@@ -101,7 +101,7 @@
                                                             @options={{this.availableColumns}}
                                                             @selected={{condition.field}}
                                                             @onChange={{fn this.updateConditionField groupIndex conditionIndex}}
-                                                            @placeholder="Select field..."
+                                                            @placeholder={{t "ember-ui.components.query-builder.conditions.select-field"}}
                                                             @triggerClass="form-select form-input"
                                                             @searchEnabled={{true}}
                                                             @searchField="label"
@@ -121,7 +121,7 @@
                                                             @options={{this.getOperatorsForField condition.field}}
                                                             @selected={{condition.operator}}
                                                             @onChange={{fn this.updateConditionOperator groupIndex conditionIndex}}
-                                                            @placeholder="Operator..."
+                                                            @placeholder={{t "ember-ui.components.query-builder.conditions.operator"}}
                                                             @triggerClass="form-select form-input"
                                                             @disabled={{not condition.field}}
                                                             as |option|
@@ -141,14 +141,14 @@
                                                                 <Input
                                                                     @value={{get condition.value 0}}
                                                                     @type={{this.getInputTypeForField condition.field}}
-                                                                    placeholder="From"
+                                                                    placeholder={{t "ember-ui.components.query-builder.conditions.from"}}
                                                                     class="form-input form-input-sm"
                                                                     {{on "input" (fn this.updateConditionRangeValue groupIndex conditionIndex 0)}}
                                                                 />
                                                                 <Input
                                                                     @value={{get condition.value 1}}
                                                                     @type={{this.getInputTypeForField condition.field}}
-                                                                    placeholder="To"
+                                                                    placeholder={{t "ember-ui.components.query-builder.conditions.to"}}
                                                                     class="form-input form-input-sm"
                                                                     {{on "input" (fn this.updateConditionRangeValue groupIndex conditionIndex 1)}}
                                                                 />
@@ -159,7 +159,7 @@
                                                                     @options={{this.getValueOptionsForField condition.field}}
                                                                     @selected={{condition.value}}
                                                                     @onChange={{fn this.updateConditionValue groupIndex conditionIndex}}
-                                                                    @placeholder="Select values..."
+                                                                    @placeholder={{t "ember-ui.components.query-builder.conditions.select-values"}}
                                                                     @triggerClass="form-select form-input"
                                                                     @allowClear={{true}}
                                                                     as |option|
@@ -173,7 +173,7 @@
                                                                     @options={{this.booleanOptions}}
                                                                     @selected={{condition.value}}
                                                                     @onChange={{fn this.updateConditionValue groupIndex conditionIndex}}
-                                                                    @placeholder="Select value..."
+                                                                    @placeholder={{t "ember-ui.components.query-builder.conditions.select-value"}}
                                                                     @triggerClass="form-select form-input"
                                                                     as |option|
                                                                 >
@@ -184,7 +184,7 @@
                                                             <Input
                                                                 @value={{condition.value}}
                                                                 @type={{this.getInputTypeForField condition.field}}
-                                                                placeholder="Enter value..."
+                                                                placeholder={{t "ember-ui.components.query-builder.conditions.enter-value"}}
                                                                 class="form-input form-input-sm"
                                                                 {{on "input" (fn this.updateConditionValue groupIndex conditionIndex)}}
                                                             />
@@ -204,7 +204,12 @@
                                     </DragSortList>
                                 {{/if}}
 
-                                <Button @text="Add condition" @icon="plus" @size="xs" @onClick={{fn this.addConditionToGroup groupIndex}} />
+                                <Button
+                                    @text={{t "ember-ui.components.query-builder.conditions.add-condition"}}
+                                    @icon="plus"
+                                    @size="xs"
+                                    @onClick={{fn this.addConditionToGroup groupIndex}}
+                                />
                             </div>
 
                             {{#if group.isNested}}
@@ -217,16 +222,16 @@
                         <div class="flex items-center justify-center border border-dashed border-gray-300 dark:border-gray-600 p-6 rounded-xl bg-gray-50 dark:bg-gray-800">
                             <div class="text-center">
                                 <FaIcon @icon="filter" @size="2x" class="text-gray-400 mb-2" />
-                                <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">No conditions set</div>
-                                <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">Add conditions to filter your data</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">{{t "ember-ui.components.query-builder.conditions.no-conditions-set"}}</div>
+                                <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">{{t "ember-ui.components.query-builder.conditions.add-conditions-to-filter-your-data"}}</div>
                             </div>
                         </div>
                     </div>
                 {{/if}}
 
                 <div class="condition-actions">
-                    <Button @text="Add condition" @type="primary" @icon="plus" @size="xs" @onClick={{this.addCondition}} />
-                    <Button @text="Add inner group" @type="secondary" @icon="layer-group" @size="xs" @onClick={{this.addConditionGroup}} />
+                    <Button @text={{t "ember-ui.components.query-builder.conditions.add-condition"}} @type="primary" @icon="plus" @size="xs" @onClick={{this.addCondition}} />
+                    <Button @text={{t "ember-ui.components.query-builder.conditions.add-inner-group"}} @type="secondary" @icon="layer-group" @size="xs" @onClick={{this.addConditionGroup}} />
                 </div>
             </div>
         {{else}}
@@ -234,8 +239,8 @@
                 <div class="flex items-center justify-center border border-dashed border-gray-300 dark:border-gray-600 p-6 rounded-xl bg-gray-50 dark:bg-gray-800">
                     <div class="text-center">
                         <FaIcon @icon="table" @size="2x" class="text-gray-400 mb-2" />
-                        <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">Select fields first</div>
-                        <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">Choose columns to enable filtering</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">{{t "ember-ui.components.query-builder.conditions.select-fields-first"}}</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">{{t "ember-ui.components.query-builder.conditions.choose-columns-to-enable-filtering"}}</div>
                     </div>
                 </div>
             </div>

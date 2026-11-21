@@ -1,11 +1,11 @@
 <div class="tip-tap-editor" {{did-insert this.createTipTapEditor}} ...attributes>
     <div class="tip-tap-editor-controls">
         <div class="tip-tap-editor-control-group grouped-buttons">
-            <Button class="tip-tap-control-button" @onClick={{this.undo}} @icon="arrow-rotate-left" @helpText="Undo" />
-            <Button class="tip-tap-control-button" @onClick={{this.redo}} @icon="arrow-rotate-right" @helpText="Redo" />
+            <Button class="tip-tap-control-button" @onClick={{this.undo}} @icon="arrow-rotate-left" @helpText={{t "ember-ui.components.tip-tap-editor.undo"}} />
+            <Button class="tip-tap-control-button" @onClick={{this.redo}} @icon="arrow-rotate-right" @helpText={{t "ember-ui.components.tip-tap-editor.redo"}} />
         </div>
         <div class="tip-tap-editor-control-group">
-            <DropdownButton @text="Format" @icon="caret-down" @buttonClass="tip-tap-control-button" @renderInPlace={{true}} as |dd|>
+            <DropdownButton @text={{t "ember-ui.components.tip-tap-editor.format"}} @icon="caret-down" @buttonClass="tip-tap-control-button" @renderInPlace={{true}} as |dd|>
                 <div class="next-dd-menu" aria-labelledby="editor-format-menu">
                     {{#each this.formatControls as |formatControl|}}
                         <a href="javascript:;" class="next-dd-item" {{on "click" (dropdown-fn dd formatControl.fn)}}>
@@ -21,7 +21,7 @@
             </DropdownButton>
         </div>
         <div class="tip-tap-editor-control-group">
-            <DropdownButton @text="Heading" @icon="caret-down" @buttonClass="tip-tap-control-button" @renderInPlace={{true}} as |dd|>
+            <DropdownButton @text={{t "ember-ui.components.tip-tap-editor.heading"}} @icon="caret-down" @buttonClass="tip-tap-control-button" @renderInPlace={{true}} as |dd|>
                 <div class="next-dd-menu" aria-labelledby="editor-format-menu">
                     {{#each this.headingControls as |headingControl|}}
                         <a href="javascript:;" class="next-dd-item" {{on "click" (dropdown-fn dd headingControl.fn headingControl.params)}}>
@@ -35,7 +35,7 @@
                     {{/each}}
                 </div>
             </DropdownButton>
-            <DropdownButton @text="Font" @icon="caret-down" @buttonClass="tip-tap-control-button" @renderInPlace={{true}} as |dd|>
+            <DropdownButton @text={{t "ember-ui.components.tip-tap-editor.font"}} @icon="caret-down" @buttonClass="tip-tap-control-button" @renderInPlace={{true}} as |dd|>
                 <div class="next-dd-menu" aria-labelledby="editor-format-menu">
                     {{#each this.fontFamilyControls as |fontFamilyControl|}}
                         <a href="javascript:;" class="next-dd-item" {{on "click" (dropdown-fn dd fontFamilyControl.fn fontFamilyControl.params)}}>
@@ -51,32 +51,39 @@
             </DropdownButton>
             <div class="tip-tap-colorpicker">
                 <Input @type="color" @value={{this.color}} {{did-insert this.setColorPickerNode}} {{on "change" this.fontColor}} class="tip-tap-colorpicker-input" />
-                <Button class="tip-tap-control-button" @helpText="Clear Color" @onClick={{this.clearFontColor}} @icon="eraser" />
+                <Button class="tip-tap-control-button" @helpText={{t "ember-ui.components.tip-tap-editor.clear-color"}} @onClick={{this.clearFontColor}} @icon="eraser" />
             </div>
         </div>
         <div class="tip-tap-editor-control-group grouped-buttons">
-            <Button class="tip-tap-control-button" @onClick={{this.alignLeft}} @icon="align-left" @helpText="Align Left" />
-            <Button class="tip-tap-control-button" @onClick={{this.alignCenter}} @icon="align-center" @helpText="Align Center" />
-            <Button class="tip-tap-control-button" @onClick={{this.alignRight}} @icon="align-right" @helpText="Align Right" />
+            <Button class="tip-tap-control-button" @onClick={{this.alignLeft}} @icon="align-left" @helpText={{t "ember-ui.components.tip-tap-editor.align-left"}} />
+            <Button class="tip-tap-control-button" @onClick={{this.alignCenter}} @icon="align-center" @helpText={{t "ember-ui.components.tip-tap-editor.align-center"}} />
+            <Button class="tip-tap-control-button" @onClick={{this.alignRight}} @icon="align-right" @helpText={{t "ember-ui.components.tip-tap-editor.align-right"}} />
         </div>
         <div class="tip-tap-editor-control-group">
-            <Button class="tip-tap-control-button" @onClick={{this.paragraph}} @icon="paragraph" @helpText="Paragraph" />
-            <Button class="tip-tap-control-button" @onClick={{this.blockquote}} @icon="quote-left" @helpText="Blockquote" />
-            <Button class="tip-tap-control-button" @onClick={{this.codeblock}} @icon="code" @helpText="Codeblock" />
-            <Button class="tip-tap-control-button" @onClick={{this.horizontalRule}} @icon="minus" @helpText="Insert Horizontal Rule" />
+            <Button class="tip-tap-control-button" @onClick={{this.paragraph}} @icon="paragraph" @helpText={{t "ember-ui.components.tip-tap-editor.paragraph"}} />
+            <Button class="tip-tap-control-button" @onClick={{this.blockquote}} @icon="quote-left" @helpText={{t "ember-ui.components.tip-tap-editor.blockquote"}} />
+            <Button class="tip-tap-control-button" @onClick={{this.codeblock}} @icon="code" @helpText={{t "ember-ui.components.tip-tap-editor.codeblock"}} />
+            <Button class="tip-tap-control-button" @onClick={{this.horizontalRule}} @icon="minus" @helpText={{t "ember-ui.components.tip-tap-editor.insert-horizontal-rule"}} />
         </div>
         <div class="tip-tap-editor-control-group">
-            <Button class="tip-tap-control-button" @onClick={{this.bold}} @icon="bold" @helpText="Bold" />
-            <Button class="tip-tap-control-button" @onClick={{this.italic}} @icon="italic" @helpText="Italic" />
-            <Button class="tip-tap-control-button" @onClick={{this.strikethrough}} @icon="strikethrough" @helpText="Strikethrough" />
+            <Button class="tip-tap-control-button" @onClick={{this.bold}} @icon="bold" @helpText={{t "ember-ui.components.tip-tap-editor.bold"}} />
+            <Button class="tip-tap-control-button" @onClick={{this.italic}} @icon="italic" @helpText={{t "ember-ui.components.tip-tap-editor.italic"}} />
+            <Button class="tip-tap-control-button" @onClick={{this.strikethrough}} @icon="strikethrough" @helpText={{t "ember-ui.components.tip-tap-editor.strikethrough"}} />
         </div>
         <div class="tip-tap-editor-control-group">
-            <Button class="tip-tap-control-button" @onClick={{this.list}} @icon="list" @helpText="List" />
-            <Button class="tip-tap-control-button" @onClick={{this.orderedList}} @icon="list-ol" @helpText="Ordered List" />
+            <Button class="tip-tap-control-button" @onClick={{this.list}} @icon="list" @helpText={{t "ember-ui.components.tip-tap-editor.list"}} />
+            <Button class="tip-tap-control-button" @onClick={{this.orderedList}} @icon="list-ol" @helpText={{t "ember-ui.components.tip-tap-editor.ordered-list"}} />
         </div>
         <div class="tip-tap-editor-control-group">
-            <Button class="tip-tap-control-button" @onClick={{this.insertTable}} @icon="table" @helpText="Insert Table" />
-            <DropdownButton @text="Table" @icon="caret-down" @buttonClass="tip-tap-control-button" @renderInPlace={{true}} @helpText="Modify Current Table" as |dd|>
+            <Button class="tip-tap-control-button" @onClick={{this.insertTable}} @icon="table" @helpText={{t "ember-ui.components.tip-tap-editor.insert-table"}} />
+            <DropdownButton
+                @text={{t "ember-ui.components.tip-tap-editor.table"}}
+                @icon="caret-down"
+                @buttonClass="tip-tap-control-button"
+                @renderInPlace={{true}}
+                @helpText={{t "ember-ui.components.tip-tap-editor.modify-current-table"}}
+                as |dd|
+            >
                 <div class="next-dd-menu" aria-labelledby="editor-format-menu">
                     {{#each this.tableControls as |tableControl|}}
                         {{#if tableControl.seperator}}
@@ -107,10 +114,16 @@
                     {{/if}}
                 </a>
                 <Attach::Tooltip @class="clean" @animation="scale" @placement={{or @tooltipPlacement "top"}}>
-                    <InputInfo @text="Insert Image" />
+                    <InputInfo @text={{t "ember-ui.components.tip-tap-editor.insert-image"}} />
                 </Attach::Tooltip>
             </FileUpload>
-            <Button class="tip-tap-control-button" @onClick={{this.insertYoutube}} @icon="youtube" @iconPrefix="fab" @helpText="Insert Youtube Video" />
+            <Button
+                class="tip-tap-control-button"
+                @onClick={{this.insertYoutube}}
+                @icon="youtube"
+                @iconPrefix="fab"
+                @helpText={{t "ember-ui.components.tip-tap-editor.insert-youtube-video"}}
+            />
         </div>
     </div>
 </div>

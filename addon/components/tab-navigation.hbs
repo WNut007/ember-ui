@@ -45,7 +45,7 @@
                                     </span>
                                 {{/if}}
                                 {{#if tab.isClosable}}
-                                    <button type="button" class="tab-close" aria-label="Close {{tab.label}}" {{on "click" (fn this.closeTab tab)}}>
+                                    <button type="button" class="tab-close" aria-label={{t "ember-ui.components.tab-navigation.close" label=tab.label}} {{on "click" (fn this.closeTab tab)}}>
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                         </svg>
@@ -84,7 +84,7 @@
                                     </span>
                                 {{/if}}
                                 {{#if tab.isClosable}}
-                                    <button type="button" class="tab-close" aria-label="Close {{tab.label}}" {{on "click" (fn this.closeTab tab)}}>
+                                    <button type="button" class="tab-close" aria-label={{t "ember-ui.components.tab-navigation.close" label=tab.label}} {{on "click" (fn this.closeTab tab)}}>
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                         </svg>
@@ -126,7 +126,7 @@
                             {{/if}}
                             {{#if tab.isClosable}}
 
-                                <button type="button" class="tab-close" aria-label="Close {{tab.label}}" {{on "click" (fn this.closeTab tab)}}>
+                                <button type="button" class="tab-close" aria-label={{t "ember-ui.components.tab-navigation.close" label=tab.label}} {{on "click" (fn this.closeTab tab)}}>
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
@@ -139,7 +139,7 @@
                     <BasicDropdown @renderInPlace={{false}} @horizontalPosition="right" as |dd|>
                         <dd.Trigger
                             class="tab-item tab-more-trigger {{@tabClass}} {{if this.moreTabIsActive 'tab-item--active'}}"
-                            aria-label="More tabs"
+                            aria-label={{t "ember-ui.components.tab-navigation.more-tabs"}}
                             aria-haspopup="menu"
                             aria-expanded={{if dd.isOpen "true" "false"}}
                             data-tab-navigation-more
@@ -147,7 +147,7 @@
                             <FaIcon @icon="ellipsis-h" @size="sm" />
                         </dd.Trigger>
                         <dd.Content class="tab-overflow-dropdown-content">
-                            <div class="next-dd-menu tab-overflow-menu mt-1 mx-0" role="menu" aria-label="More tabs">
+                            <div class="next-dd-menu tab-overflow-menu mt-1 mx-0" role="menu" aria-label={{t "ember-ui.components.tab-navigation.more-tabs"}}>
                                 {{#each this.overflowTabs as |tab|}}
                                     {{#if tab.route}}
                                         {{#if tab.model}}
@@ -235,7 +235,7 @@
                 {{/if}}
             {{/if}}
             {{#if @onAddTab}}
-                <button type="button" class="tab-add-button" aria-label="Add new tab" data-tab-navigation-add {{on "click" @onAddTab}}>
+                <button type="button" class="tab-add-button" aria-label={{t "ember-ui.components.tab-navigation.add-new-tab"}} data-tab-navigation-add {{on "click" @onAddTab}}>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>

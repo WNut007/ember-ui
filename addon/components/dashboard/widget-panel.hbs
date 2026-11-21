@@ -7,13 +7,13 @@
         </:actions>
     </Overlay::Header>
 
-    {{!--
+    {{!
         no-padding on the body kills the global `px-1` so the sticky header sits flush.
         wrapperClass="dashboard-widget-panel-body" zeroes out its own padding via CSS
         and lets the child elements manage their own.
-    --}}
+    }}
     <Overlay::Body class="no-padding" @wrapperClass="dashboard-widget-panel-body">
-        {{!-- Sticky search + tab strip --}}
+        {{! Sticky search + tab strip }}
         <div class="sticky top-0 z-10 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-3 pt-3 pb-2">
             <div class="relative mb-2">
                 <FaIcon @icon="search" class="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-gray-400 dark:text-gray-500 pointer-events-none" />
@@ -25,10 +25,12 @@
                     {{on "input" this.onSearch}}
                 />
                 {{#if this.searchQuery}}
-                    <button type="button"
-                            class="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
-                            aria-label="Clear search"
-                            {{on "click" this.clearSearch}}>
+                    <button
+                        type="button"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                        aria-label={{t "ember-ui.components.dashboard.widget-panel.clear-search"}}
+                        {{on "click" this.clearSearch}}
+                    >
                         <FaIcon @icon="times-circle" />
                     </button>
                 {{/if}}
@@ -36,17 +38,25 @@
 
             <div class="flex bg-gray-100 dark:bg-gray-900/60 rounded-md p-0.5 gap-0.5">
                 {{#each this.tabs as |tab|}}
-                    <button type="button"
-                            class="flex-1 text-[11px] px-2 py-1 rounded font-medium transition flex items-center justify-center gap-1.5
-                                   {{if (eq this.activeTab tab.key)
-                                       'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm'
-                                       'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}}"
-                            {{on "click" (fn this.selectTab tab.key)}}>
+                    <button
+                        type="button"
+                        class="flex-1 text-[11px] px-2 py-1 rounded font-medium transition flex items-center justify-center gap-1.5
+                            {{if
+                                (eq this.activeTab tab.key)
+                                'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm'
+                                'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+                            }}"
+                        {{on "click" (fn this.selectTab tab.key)}}
+                    >
                         <span>{{t (concat "dashboard-widget-panel." tab.label)}}</span>
-                        <span class="text-[10px] px-1 rounded
-                                     {{if (eq this.activeTab tab.key)
-                                         'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300'
-                                         'bg-gray-200/70 dark:bg-gray-700/70 text-gray-500 dark:text-gray-400'}}">
+                        <span
+                            class="text-[10px] px-1 rounded
+                                {{if
+                                    (eq this.activeTab tab.key)
+                                    'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300'
+                                    'bg-gray-200/70 dark:bg-gray-700/70 text-gray-500 dark:text-gray-400'
+                                }}"
+                        >
                             {{tab.count}}
                         </span>
                     </button>

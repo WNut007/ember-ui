@@ -20,9 +20,9 @@
                     <div class="kanban-drop-indicator"></div>
                 {{/if}}
 
-                {{!-- The drag handlers are passed through unwrapped: Kanban::Card's own
+                {{! The drag handlers are passed through unwrapped: Kanban::Card's own
                     onDragStart/onDragEnd already forward the card ahead of the event, so
-                    currying it here as well would deliver (card, card, event). --}}
+                    currying it here as well would deliver (card, card, event). }}
                 {{yield
                     (component
                         "kanban/card"
@@ -71,7 +71,7 @@
 
         {{#unless this.cards.length}}
             <div class="kanban-column-empty">
-                <p class="kanban-empty-text">No {{pluralize (or @subject "card")}} yet</p>
+                <p class="kanban-empty-text">{{t "ember-ui.components.kanban.column.no-yet" pluralize=(pluralize (or @subject "card"))}}</p>
             </div>
         {{/unless}}
     </div>
@@ -79,7 +79,7 @@
     {{#unless @readonly}}
         <div class="kanban-column-footer">
             <button type="button" class="kanban-add-card-button" {{on "click" this.onCreateCard}} disabled={{@disabled}}>
-                + Add a {{or @subject "card"}}
+                {{t "ember-ui.components.kanban.column.add-a" value=(or @subject "card")}}
             </button>
         </div>
     {{/unless}}

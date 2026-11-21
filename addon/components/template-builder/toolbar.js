@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
@@ -29,14 +30,15 @@ import { action } from '@ember/object';
  * @argument {String}   [closeLabel]     - Text label shown beside the close icon (default: none)
  */
 export default class TemplateBuilderToolbarComponent extends Component {
+    @service intl;
     elementTypes = [
-        { type: 'text', icon: 'font', label: 'Text' },
-        { type: 'image', icon: 'image', label: 'Image' },
-        { type: 'table', icon: 'table', label: 'Table' },
-        { type: 'line', icon: 'minus', label: 'Line' },
-        { type: 'shape', icon: 'square', label: 'Shape' },
-        { type: 'qr_code', icon: 'qrcode', label: 'QR Code' },
-        { type: 'barcode', icon: 'barcode', label: 'Barcode' },
+        { type: 'text', icon: 'font', label: this.intl.t('ember-ui.js.components.template-builder.toolbar.text') },
+        { type: 'image', icon: 'image', label: this.intl.t('ember-ui.js.components.template-builder.toolbar.image') },
+        { type: 'table', icon: 'table', label: this.intl.t('ember-ui.js.components.template-builder.toolbar.table') },
+        { type: 'line', icon: 'minus', label: this.intl.t('ember-ui.js.components.template-builder.toolbar.line') },
+        { type: 'shape', icon: 'square', label: this.intl.t('ember-ui.js.components.template-builder.toolbar.shape') },
+        { type: 'qr_code', icon: 'qrcode', label: this.intl.t('ember-ui.js.components.template-builder.toolbar.qr-code') },
+        { type: 'barcode', icon: 'barcode', label: this.intl.t('ember-ui.js.components.template-builder.toolbar.barcode') },
     ];
 
     get zoomPercent() {

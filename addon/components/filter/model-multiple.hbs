@@ -18,7 +18,7 @@
             {{get model this.optionLabel}}
         {{/if}}
     </ModelSelectMultiple>
-    <button type="button" class="clear-button" disabled={{not this.selectedModels.length}} aria-label="Clear" {{on "click" this.clear}}>
+    <button type="button" class="clear-button" disabled={{not this.selectedModels.length}} aria-label={{t "ember-ui.components.filter.model-multiple.clear"}} {{on "click" this.clear}}>
         <FaIcon @icon="times" />
     </button>
 </div>

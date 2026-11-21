@@ -7,6 +7,7 @@ import { task } from 'ember-concurrency';
 import noop from '../utils/noop';
 
 export default class ChatTrayComponent extends Component {
+    @service intl;
     @service chat;
     @service socket;
     @service fetch;
@@ -224,7 +225,7 @@ export default class ChatTrayComponent extends Component {
     @action removeChannel(chatChannelRecord) {
         this.modalsManager.confirm({
             title: `Are you sure you wish to end this chat (${chatChannelRecord.title})?`,
-            body: 'Once this chat is ended, it will no longer be accessible for anyone.',
+            body: this.intl.t('ember-ui.js.components.chat-tray.once-this-chat-is-ended-it'),
             confirm: (modal) => {
                 modal.startLoading();
 
