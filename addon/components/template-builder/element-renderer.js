@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import interact from 'interactjs';
@@ -39,6 +40,7 @@ import interact from 'interactjs';
  * @argument {Function} onResize     - Called with (uuid, { x, y, width, height }) after resize ends
  */
 export default class TemplateBuilderElementRendererComponent extends Component {
+    @service intl;
     /** @type {import('interactjs').Interactable|null} */
     _interactable = null;
 
@@ -344,10 +346,14 @@ export default class TemplateBuilderElementRendererComponent extends Component {
     get tableSourceCaption() {
         const el = this.args.element;
         if (el.data_source_mode === 'variable') {
-            return el.data_source ? `Rows from ${el.data_source}` : 'Rows from a variable';
+            return el.data_source
+                ? this.intl.t('ember-ui.js.components.template-builder.element-renderer.rows-from-data-source', { data_source: el.data_source })
+                : this.intl.t('ember-ui.js.components.template-builder.element-renderer.rows-from-a-variable');
         }
         if (el.data_source_mode === 'query') {
-            return el.query_endpoint ? `Rows from ${el.query_endpoint}` : 'Rows from a query';
+            return el.query_endpoint
+                ? this.intl.t('ember-ui.js.components.template-builder.element-renderer.rows-from-query-endpoint', { query_endpoint: el.query_endpoint })
+                : this.intl.t('ember-ui.js.components.template-builder.element-renderer.rows-from-a-query');
         }
         return null;
     }
@@ -403,7 +409,12 @@ export default class TemplateBuilderElementRendererComponent extends Component {
 
     get codeLabel() {
         const el = this.args.element;
-        return el.value ?? (this.isQrCode ? 'QR Code' : 'Barcode');
+        return (
+            el.value ??
+            (this.isQrCode
+                ? this.intl.t('ember-ui.js.components.template-builder.element-renderer.qr-code')
+                : this.intl.t('ember-ui.js.components.template-builder.element-renderer.barcode'))
+        );
     }
 
     // ── Private helpers ───────────────────────────────────────────────────────

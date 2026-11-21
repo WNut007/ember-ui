@@ -6,6 +6,7 @@ import { getOwner } from '@ember/application';
 import window from 'ember-window-mock';
 
 export default class LayoutSidebarNavigatorComponent extends Component {
+    @service intl;
     @service('sidebar-navigator') sidebarNavigator;
     @tracked query = '';
     /* istanbul ignore next -- syncInitialViewStackToRoute() runs from the constructor and assigns this on every path before anything reads it */
@@ -153,7 +154,9 @@ export default class LayoutSidebarNavigatorComponent extends Component {
     }
 
     get shortcutLabel() {
-        return window.navigator?.platform?.toLowerCase().includes('mac') ? 'Cmd K' : 'Ctrl K';
+        return window.navigator?.platform?.toLowerCase().includes('mac')
+            ? this.intl.t('ember-ui.js.components.layout.sidebar.navigator.cmd-k')
+            : this.intl.t('ember-ui.js.components.layout.sidebar.navigator.ctrl-k');
     }
 
     get hasSearchPopover() {

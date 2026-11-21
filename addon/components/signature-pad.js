@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -68,6 +69,7 @@ import SignaturePad from 'signature_pad';
  *   { clear, undo, resize, isEmpty, toDataURL, toData, fromDataURL, instance }
  */
 export default class SignaturePadComponent extends Component {
+    @service intl;
     /**
      * The canvas element the pad is mounted on.
      * @type {HTMLCanvasElement}
@@ -152,23 +154,23 @@ export default class SignaturePadComponent extends Component {
     }
 
     get clearLabel() {
-        return this.args.clearLabel ?? 'Clear';
+        return this.args.clearLabel ?? this.intl.t('ember-ui.js.components.signature-pad.clear');
     }
 
     get undoLabel() {
-        return this.args.undoLabel ?? 'Undo';
+        return this.args.undoLabel ?? this.intl.t('ember-ui.js.components.signature-pad.undo');
     }
 
     get doneLabel() {
-        return this.args.doneLabel ?? 'Done';
+        return this.args.doneLabel ?? this.intl.t('ember-ui.js.components.signature-pad.done');
     }
 
     get placeholder() {
-        return this.args.placeholder ?? 'Sign here';
+        return this.args.placeholder ?? this.intl.t('ember-ui.js.components.signature-pad.sign-here');
     }
 
     get emptyText() {
-        return this.args.emptyText ?? 'No signature';
+        return this.args.emptyText ?? this.intl.t('ember-ui.js.components.signature-pad.no-signature');
     }
 
     get alt() {

@@ -69,7 +69,7 @@ export default class QueryBuilderSortByComponent extends Component {
         /* istanbul ignore else -- sort-by.hbs only renders {{this.sortingMessage}} inside the
            {{else}} of {{#if this.canSort}}, so it is never read while sorting is possible */
         if (!columnsToUse.length) {
-            return 'Select columns first to enable sorting';
+            return this.intl.t('ember-ui.js.components.query-builder.sort-by.select-columns-first-to-enable-sorting');
         }
 
         /* istanbul ignore next -- see above */

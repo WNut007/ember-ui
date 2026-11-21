@@ -93,7 +93,7 @@ export default class QueryBuilderConditionsComponent extends Component {
 
     get conditionsSummary() {
         /* istanbul ignore if -- the template reads this getter as {{if this.hasConditions this.conditionsSummary "No conditions"}}, so it is only ever evaluated when hasConditions is already true */
-        if (!this.hasConditions) return 'No conditions';
+        if (!this.hasConditions) return this.intl.t('ember-ui.js.components.query-builder.conditions.no-conditions');
 
         const totalConditions = this.conditionGroups.reduce((total, group) => total + group.conditions.length, 0);
         const groupCount = this.conditionGroups.filter((group) => group.isNested).length;

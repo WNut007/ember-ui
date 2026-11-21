@@ -623,7 +623,7 @@ export default class TemplateBuilderPropertiesPanelComponent extends Component {
             this.uploadedImageFilename = null;
             /* istanbul ignore else -- notifications is an injected service, so it is always present */
             if (this.notifications) {
-                this.notifications.error(`Image upload failed: ${err.message}`);
+                this.notifications.error(this.intl.t('ember-ui.js.components.template-builder.properties-panel.image-upload-failed-message', { message: err.message }));
             }
         }
     }

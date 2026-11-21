@@ -95,7 +95,7 @@ export default class MetadataEditorComponent extends Component {
     }
 
     get label() {
-        return this.args.label ?? 'Metadata';
+        return this.args.label ?? this.intl.t('ember-ui.js.components.metadata-editor.metadata');
     }
 
     get allowBoolean() {

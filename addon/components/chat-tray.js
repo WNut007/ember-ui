@@ -224,7 +224,7 @@ export default class ChatTrayComponent extends Component {
 
     @action removeChannel(chatChannelRecord) {
         this.modalsManager.confirm({
-            title: `Are you sure you wish to end this chat (${chatChannelRecord.title})?`,
+            title: this.intl.t('ember-ui.js.components.chat-tray.are-you-sure-you-wish-to', { title: chatChannelRecord.title }),
             body: this.intl.t('ember-ui.js.components.chat-tray.once-this-chat-is-ended-it'),
             confirm: (modal) => {
                 modal.startLoading();

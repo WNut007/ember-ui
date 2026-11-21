@@ -1,9 +1,11 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { computed, action } from '@ember/object';
 import { equal } from '@ember/object/computed';
 
 export default class UnitInputComponent extends Component {
+    @service intl;
     /**
      * Units of weight
      *
@@ -143,7 +145,7 @@ export default class UnitInputComponent extends Component {
 
         // `unitName` falls back to `this.unit`, which is undefined with no @unit — the field
         // rendered the user-visible placeholder "Enter undefined".
-        return this.unitName ? `Enter ${this.unitName}` : null;
+        return this.unitName ? this.intl.t('ember-ui.js.components.unit-input.enter-unitname', { unitName: this.unitName }) : null;
     }
 
     /**

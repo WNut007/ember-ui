@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 /* eslint-disable ember/no-get -- records and identity stubs are read by path, so `get` is the point */
 import Component from '@glimmer/component';
 import { get } from '@ember/object';
@@ -9,6 +10,7 @@ import { get } from '@ember/object';
  * shows the user's summary on hover.
  */
 export default class UserPillComponent extends Component {
+    @service intl;
     get resource() {
         return this.args.user ?? this.args.resource;
     }
@@ -20,7 +22,7 @@ export default class UserPillComponent extends Component {
 
         const email = get(this.resource ?? {}, 'email');
 
-        return email ?? (this.resource ? 'No email' : '-');
+        return email ?? (this.resource ? this.intl.t('ember-ui.js.components.user.pill.no-email') : '-');
     }
 
     get showOnlineIndicator() {

@@ -59,7 +59,7 @@ export default class TemplateBuilderLayersPanelComponent extends Component {
             qr_code: 'QR Code',
             barcode: 'Barcode',
         };
-        return typeLabels[element.type] ?? 'Element';
+        return typeLabels[element.type] ?? this.intl.t('ember-ui.js.components.template-builder.layers-panel.element');
     }
 
     @action

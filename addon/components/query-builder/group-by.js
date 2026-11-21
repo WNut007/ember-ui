@@ -113,13 +113,13 @@ export default class QueryBuilderGroupByComponent extends Component {
      */
     get groupingMessage() {
         if (!this.args.selectedColumns?.length) {
-            return 'Select columns first to enable grouping';
+            return this.intl.t('ember-ui.js.components.query-builder.group-by.select-columns-first-to-enable-grouping');
         }
 
         /* istanbul ignore else -- group-by.hbs only renders {{this.groupingMessage}} inside the
            {{else}} of {{#if this.canGroup}}, so it is never read while grouping is possible */
         if (!this.canGroup) {
-            return 'No non-aggregated columns available for grouping';
+            return this.intl.t('ember-ui.js.components.query-builder.group-by.no-non-aggregated-columns-available-for');
         }
 
         /* istanbul ignore next -- see above */

@@ -3,6 +3,7 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default class ChatTrayConversationRowComponent extends Component {
+    @service intl;
     @service currentUser;
 
     get channel() {
@@ -32,7 +33,7 @@ export default class ChatTrayConversationRowComponent extends Component {
     }
 
     get title() {
-        return this.channel?.title || this.channel?.name || 'Untitled Chat';
+        return this.channel?.title || this.channel?.name || this.intl.t('ember-ui.js.components.chat-tray.conversation-row.untitled-chat');
     }
 
     get preview() {
