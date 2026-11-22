@@ -116,6 +116,18 @@ body[data-theme='dark'] {
     border-bottom: 1px solid var(--tab-bg-primary);
 }
 
+/* The tab strip clips overflow, so the browser's focus ring around a clicked tab showed
+   only as two dark vertical bars. No ring on mouse focus; an inset ring for keyboard focus. */
+.tab-navigation .tab-item:focus {
+    outline: none;
+}
+
+.tab-navigation .tab-item:focus-visible {
+    outline: 2px solid var(--tab-focus-ring);
+    outline-offset: -2px;
+    border-radius: 0.25rem;
+}
+
 .tab-content {
     display: block;
     width: 100%;

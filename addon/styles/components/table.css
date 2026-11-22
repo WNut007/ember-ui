@@ -405,7 +405,14 @@ table .resizer {
 table .resizer.resizer:hover,
 .next-table-wrapper table .resizer.resizing,
 table .resizer.resizing {
-    @apply border-r-4 border-solid border-blue-500 border-opacity-60;
+    @apply border-r border-solid border-gray-300;
+}
+
+body[data-theme='dark'] .next-table-wrapper table .resizer.resizer:hover,
+body[data-theme='dark'] table .resizer.resizer:hover,
+body[data-theme='dark'] .next-table-wrapper table .resizer.resizing,
+body[data-theme='dark'] table .resizer.resizing {
+    @apply border-gray-600;
 }
 
 body[data-theme='dark'] .table-wrapper.table-fluid > .next-table-wrapper > table > tbody > tr.expandable-row.is-expanded > td,
