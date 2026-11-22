@@ -2,9 +2,14 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'dummy/tests/helpers';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { clearCountryNameCache } from '@fleetbase/ember-ui/components/country-name';
 
 module('Integration | Component | country-name', function (hooks) {
     setupRenderingTest(hooks);
+
+    hooks.beforeEach(function () {
+        clearCountryNameCache();
+    });
 
     test('it looks up and renders the country name for a 2-letter code', async function (assert) {
         const fetch = this.owner.lookup('service:fetch');
@@ -37,5 +42,36 @@ module('Integration | Component | country-name', function (hooks) {
         await render(hbs`<CountryName />`);
 
         assert.dom(this.element).hasText('-');
+    });
+
+    test('one lookup per country however many cells show it', async function (assert) {
+        const fetch = this.owner.lookup('service:fetch');
+        fetch.responses['lookup/country/TH'] = { name: 'Thailand' };
+
+        await render(hbs`<CountryName @country="TH" /> <CountryName @country="TH" /> <CountryName @country="th" />`);
+
+        assert.dom(this.element).hasText('Thailand Thailand Thailand');
+        assert.strictEqual(fetch.calls.filter((call) => /lookup\/country\/th/i.test(call.args[0])).length, 1, 'asked once');
+    });
+
+    test('a failed lookup is retried by the next cell', async function (assert) {
+        const fetch = this.owner.lookup('service:fetch');
+        const originalGet = fetch.get;
+        let fail = true;
+        fetch.get = function (...args) {
+            if (fail) {
+                fail = false;
+                this.calls.push({ method: 'get', args });
+                return Promise.reject(new Error('offline'));
+            }
+            return originalGet.apply(this, args);
+        };
+        fetch.responses['lookup/country/JP'] = { name: 'Japan' };
+
+        await render(hbs`<CountryName @country="JP" />`);
+        await render(hbs`<CountryName @country="JP" />`);
+
+        assert.dom(this.element).hasText('Japan');
+        assert.strictEqual(fetch.calls.filter((call) => call.args[0] === 'lookup/country/JP').length, 2, 'asked again after the failure');
     });
 });

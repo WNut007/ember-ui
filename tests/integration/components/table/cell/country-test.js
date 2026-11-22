@@ -3,6 +3,7 @@ import { setupRenderingTest } from 'dummy/tests/helpers';
 import { render, waitUntil, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import Service from '@ember/service';
+import { clearCountryNameCache } from '@fleetbase/ember-ui/components/country-name';
 
 // CountryName resolves 2-letter codes through the fetch service, so it is
 // stubbed here — no test may depend on a real network round trip.
@@ -12,6 +13,7 @@ module('Integration | Component | table/cell/country', function (hooks) {
     let requested;
 
     hooks.beforeEach(function () {
+        clearCountryNameCache();
         requested = [];
         this.owner.unregister('service:fetch');
         this.owner.register(

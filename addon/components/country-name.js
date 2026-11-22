@@ -18,6 +18,16 @@ import getWithDefault from '@fleetbase/ember-core/utils/get-with-default';
  * // Usage:
  * <CountryName @country="US" />
  */
+/**
+ * Country names already asked for, by code: a table shows one country cell per row, and
+ * without this every row requested the same country again.
+ */
+const countryNameRequests = new Map();
+
+export function clearCountryNameCache() {
+    countryNameRequests.clear();
+}
+
 export default class CountryNameComponent extends Component {
     /**
      * Fetch service
@@ -59,9 +69,19 @@ export default class CountryNameComponent extends Component {
             this,
             () => {
                 if (typeof country === 'string' && country.length === 2) {
-                    this.fetch.get(`lookup/country/${country}`).then((response) => {
-                        this.countryName = getWithDefault(response, 'name', country);
-                    });
+                    const code = country.toUpperCase();
+                    if (!countryNameRequests.has(code)) {
+                        const request = this.fetch.get(`lookup/country/${country}`).then((response) => getWithDefault(response, 'name', country));
+                        // A failed lookup is not remembered, so a later cell can try again.
+                        request.catch(() => countryNameRequests.delete(code));
+                        countryNameRequests.set(code, request);
+                    }
+                    const show = (name) => {
+                        if (!this.isDestroying && !this.isDestroyed) {
+                            this.countryName = name;
+                        }
+                    };
+                    countryNameRequests.get(code).then(show, () => show(country));
                 } else {
                     this.countryName = country;
                 }
