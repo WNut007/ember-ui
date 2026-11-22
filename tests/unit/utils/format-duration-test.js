@@ -11,3 +11,12 @@ module('Unit | Utility | format-duration', function () {
         assert.strictEqual(formatDuration(-10), '0s');
     });
 });
+
+module('Unit | Utility | format-duration | units', function () {
+    test('it renders each part with the given unit formatter', function (assert) {
+        const thai = (unit, n) => `${n} ${{ d: 'วัน', h: 'ชม.', m: 'นาที', s: 'วินาที' }[unit]}`;
+
+        assert.strictEqual(formatDuration(115200, thai), '1 วัน 8 ชม.');
+        assert.strictEqual(formatDuration(0, thai), '0 วินาที');
+    });
+});

@@ -87,6 +87,13 @@ module('Integration | Component | event-calendar', function (hooks) {
     });
 
     module('default options', function () {
+        test('without a user language it falls back to English', async function (assert) {
+            this.owner.lookup('service:intl').primaryLocale = undefined;
+            await render(TEMPLATE);
+
+            assert.strictEqual(option('locale'), 'en');
+        });
+
         test('it opens on a resource timeline day with sensible defaults', async function (assert) {
             await render(TEMPLATE);
 
@@ -96,7 +103,7 @@ module('Integration | Component | event-calendar', function (hooks) {
             assert.strictEqual(seconds('slotMinTime'), 0, 'midnight');
             assert.strictEqual(seconds('slotMaxTime'), 24 * 3600, 'through to midnight');
             assert.strictEqual(seconds('scrollTime'), 6 * 3600, 'scrolled to 6am');
-            assert.strictEqual(option('locale'), 'en');
+            assert.strictEqual(option('locale'), 'en-us', 'the user\'s language');
             assert.strictEqual(option('height'), '100%');
             assert.strictEqual(option('firstDay'), 0);
         });

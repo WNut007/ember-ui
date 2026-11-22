@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import { createCalendar, destroyCalendar, ResourceTimeline, ResourceTimeGrid, TimeGrid, DayGrid, List, Interaction } from '@event-calendar/core';
@@ -60,6 +61,8 @@ import '@event-calendar/core/index.css';
  *   @slotLabelContent         — function(info) returning { html } or { domNodes }
  */
 export default class EventCalendarComponent extends Component {
+    @service intl;
+
     /**
      * All plugins enabled by default. Consumers can override via @plugins.
      * @type {Array}
@@ -169,6 +172,14 @@ export default class EventCalendarComponent extends Component {
     // -------------------------------------------------------------------------
 
     /**
+     * The user's language (month and day names, date order), so a Thai user sees a Thai calendar.
+     * @returns {string}
+     */
+    get defaultLocale() {
+        return this.intl.primaryLocale ?? 'en';
+    }
+
+    /**
      * Build the full options object passed to createCalendar().
      * @returns {Object}
      */
@@ -213,7 +224,7 @@ export default class EventCalendarComponent extends Component {
                 center: 'title',
                 end: 'resourceTimelineDay,resourceTimelineWeek',
             },
-            locale: locale ?? 'en',
+            locale: locale ?? this.defaultLocale,
             scrollTime: scrollTime ?? '06:00:00',
         };
 

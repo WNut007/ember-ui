@@ -2,7 +2,7 @@
     <div class="flex items-center justify-between mb-2">
         <span>{{pluralize @items.length this.resource}}</span>
         {{#if @onCreate}}
-            <Button @type="primary" @icon="plus" @iconPrefix="fas" @text={{concat "Create " this.resource}} @onClick={{this.onCreate}} />
+            <Button @type="primary" @icon="plus" @iconPrefix="fas" @text={{t "ember-ui.components.aside-item-scroller.create-resource" resource=this.resource}} @onClick={{this.onCreate}} />
         {{/if}}
     </div>
     <div>
@@ -55,7 +55,7 @@
             </div>
             <div>
                 {{#if @onCreate}}
-                    <Button @type="primary" @icon="plus" @text={{concat "Create " this.resource}} @onClick={{this.onCreate}} />
+                    <Button @type="primary" @icon="plus" @text={{t "ember-ui.components.aside-item-scroller.create-resource" resource=this.resource}} @onClick={{this.onCreate}} />
                 {{/if}}
             </div>
         </div>

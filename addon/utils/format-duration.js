@@ -14,25 +14,31 @@ export const secondsToTime = (secs) => {
     };
 };
 
-export default function formatDuration(secs) {
+const compactUnit = (unit, n) => `${n}${unit}`;
+
+/**
+ * Seconds as a compact duration ("1d 8h", "20m 34s"). `unit(unit, n)` renders one part, so a caller
+ * can put each unit in the user's language; the default is the compact English form.
+ */
+export default function formatDuration(secs, unit = compactUnit) {
     const time = secondsToTime(secs);
     const parts = [];
 
     if (time.d) {
-        parts.push(`${time.d}d`);
+        parts.push(unit('d', time.d));
     }
 
     if (time.h) {
-        parts.push(`${time.h}h`);
+        parts.push(unit('h', time.h));
     }
 
     if (!time.d && time.m) {
-        parts.push(`${time.m}m`);
+        parts.push(unit('m', time.m));
     }
 
     if (!time.d && !time.h && parts.length < 2 && time.s) {
-        parts.push(`${time.s}s`);
+        parts.push(unit('s', time.s));
     }
 
-    return parts.length ? parts.join(' ') : '0s';
+    return parts.length ? parts.join(' ') : unit('s', 0);
 }
