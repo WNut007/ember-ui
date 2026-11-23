@@ -7,6 +7,15 @@ import { debug } from '@ember/debug';
 import { task } from 'ember-concurrency';
 import { Point } from '@fleetbase/fleetops-data/utils/geojson';
 
+/**
+ * A coordinate as a number: typed text is parsed, and anything that is not a number is 0.
+ */
+export function toCoordinate(value) {
+    const number = typeof value === 'number' ? value : parseFloat(value);
+
+    return Number.isFinite(number) ? number : 0;
+}
+
 export default class ModelCoordinatesInputComponent extends Component {
     @service fetch;
     @tracked coordinatesInput;
@@ -61,7 +70,9 @@ export default class ModelCoordinatesInputComponent extends Component {
     }
 
     @action updateCoordinates({ latitude, longitude }) {
-        const location = new Point(longitude, latitude);
+        // Typed coordinates arrive as text; the API rejects a location whose coordinates are strings
+        // ("BoundingBox values must be integers or floats"), so store them as numbers.
+        const location = new Point(toCoordinate(longitude), toCoordinate(latitude));
         const key = this.args.locationProperty ?? 'location';
 
         this.args.model.setProperties({ [key]: location });

@@ -121,7 +121,15 @@ module('Integration | Component | model-coordinates-input', function (hooks) {
             assert.true(changes.length > 0, 'the change is reported');
             const location = this.model.location;
             assert.ok(location, 'a location is written to the model');
-            assert.deepEqual(location.coordinates, ['-74.0', '40.7'], 'stored as [longitude, latitude]');
+            assert.deepEqual(location.coordinates, [-74, 40.7], 'stored as numbers, [longitude, latitude]');
+        });
+
+        test('an empty or unreadable coordinate is stored as 0', async function (assert) {
+            await render(TEMPLATE);
+            inputApi.updateCoordinates('', 'abc');
+            await settled();
+
+            assert.deepEqual(this.model.location.coordinates, [0, 0]);
         });
 
         test('a custom location property is honoured', async function (assert) {
