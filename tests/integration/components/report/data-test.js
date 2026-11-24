@@ -73,4 +73,26 @@ module('Integration | Component | report/data', function (hooks) {
 
         assert.dom(this.element).containsText('No report preview');
     });
+
+    test('shows the export button and warns when the query limit is reached', async function (assert) {
+        this.set('resource', {
+            title: 'QA',
+            query_config: { limit: 2 },
+            result_columns: [
+                { name: 'public_id', label: 'ID' },
+                { name: 'status', label: 'Status' },
+            ],
+            data: [
+                { public_id: 'order_1', status: 'created' },
+                { public_id: 'order_2', status: null },
+            ],
+        });
+        await render(TEMPLATE);
+
+        assert.dom('button').exists('export button');
+        assert.dom('.text-amber-600').exists('limit warning shown');
+
+        this.set('resource', { ...this.resource, query_config: { limit: 50 } });
+        assert.dom('.text-amber-600').doesNotExist('no warning below the limit');
+    });
 });

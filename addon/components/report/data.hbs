@@ -1,4 +1,11 @@
 {{#if @resource.result_columns}}
+    <div class="flex items-center justify-end px-3 py-2 text-xs text-gray-500 dark:text-gray-400">
+        <span class="mr-auto">
+            {{t "ember-ui.components.report.data.row-count" count=this.rows.length}}
+            {{#if this.limitReached}}<span class="text-amber-600 dark:text-amber-400">· {{t "ember-ui.components.report.data.limit-reached" limit=this.limit}}</span>{{/if}}
+        </span>
+        <Button @size="xs" @icon="file-csv" @text={{t "ember-ui.components.report.data.export-csv"}} @onClick={{this.exportCsv}} @disabled={{eq this.rows.length 0}} />
+    </div>
     <div class="next-table-wrapper">
         <table>
             <thead>
