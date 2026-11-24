@@ -25,4 +25,14 @@ module('Integration | Helper | format-currency', function (hooks) {
 
         assert.dom(this.element).hasText('$0.00');
     });
+
+    test('it uses the organization currency when none is given', async function (assert) {
+        const currentUser = this.owner.lookup('service:current-user');
+        currentUser.company = { currency: 'THB' };
+
+        await render(hbs`{{format-currency 150000}}`);
+
+        assert.dom(this.element).includesText('1,500');
+        assert.dom(this.element).doesNotIncludeText('$');
+    });
 });
