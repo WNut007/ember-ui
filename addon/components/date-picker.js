@@ -1,12 +1,19 @@
 import Component from '@glimmer/component';
 import AirDatepicker from 'air-datepicker';
 import localeEn from 'air-datepicker/locale/en';
+import localeTh from 'air-datepicker/locale/th';
+import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { isArray } from '@ember/array';
 import { parse, format, isValid } from 'date-fns';
 
+// Calendar texts per app language (air-datepicker keeps Gregorian/C.E. years). The field's own
+// dateFormat still comes from the component, not from the locale.
+const LOCALES = { th: localeTh, en: localeEn };
+
 export default class DatePickerComponent extends Component {
+    @service intl;
     @tracked nodeRef;
     @tracked airDatePickerRef;
 
@@ -106,8 +113,13 @@ export default class DatePickerComponent extends Component {
         element.value = dates.map((date) => this.format(date)).join(', ');
     }
 
+    get calendarLocale() {
+        const primary = String(this.intl?.primaryLocale ?? 'en').toLowerCase();
+        return LOCALES[primary.split('-')[0]] ?? localeEn;
+    }
+
     getOptions() {
-        const options = this.defaultOptions;
+        const options = { ...this.defaultOptions, locale: this.calendarLocale };
         const { value, dateFormat, inline } = this.args;
 
         if (inline) {

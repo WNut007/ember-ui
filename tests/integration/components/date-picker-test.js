@@ -343,4 +343,18 @@ module('Integration | Component | date-picker', function (hooks) {
             assert.deepEqual(changes, [], 'none of it is reported');
         });
     });
+
+    test('the calendar follows the app language and keeps C.E. years', async function (assert) {
+        this.owner.lookup('service:intl').setLocale(['th-th']);
+        this.set('value', new Date(2026, 10, 24));
+        this.set('inline', true);
+        await render(TEMPLATE);
+
+        const title = find('.air-datepicker-nav--title').textContent;
+        assert.ok(title.includes('พฤศจิกายน'), `Thai month name (${title})`);
+        assert.ok(title.includes('2026'), 'C.E. year, not B.E.');
+        assert.dom(INPUT).hasValue('2026-11-24', 'field format unchanged');
+
+        this.owner.lookup('service:intl').setLocale(['en-us']);
+    });
 });
