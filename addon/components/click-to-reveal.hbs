@@ -6,7 +6,7 @@
             {{n-a @value}}
         {{/if}}
     </span>
-    <Button @text={{get-default-value @buttonText "Click to reveal"}} @size="xs" @wrapperClass="click-to-reveal--button" @onClick={{this.reveal}} @isLoading={{this.isLoading}} />
+    <Button @text={{get-default-value @buttonText this.revealText}} @size="xs" @wrapperClass="click-to-reveal--button" @onClick={{this.reveal}} @isLoading={{this.isLoading}} />
     {{#if this.canClickToCopy}}
         <span class="click-to-reveal--tooltip">
             {{#if this.isCopied}}

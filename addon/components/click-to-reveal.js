@@ -2,8 +2,17 @@ import ClickToCopyComponent from './click-to-copy';
 import { tracked } from '@glimmer/tracking';
 import { action, computed } from '@ember/object';
 import { later } from '@ember/runloop';
+import { inject as service } from '@ember/service';
 
 export default class ClickToRevealComponent extends ClickToCopyComponent {
+    @service intl;
+
+    /** "Click to reveal" in the app language; the console holds the translation. */
+    get revealText() {
+        const key = 'ember-ui.components.click-to-reveal.reveal';
+        return this.intl?.exists?.(key) ? this.intl.t(key) : 'Click to reveal';
+    }
+
     @tracked isVisible = false;
     @tracked isLoading = false;
     /* istanbul ignore next -- the constructor assigns this before anything reads it */
