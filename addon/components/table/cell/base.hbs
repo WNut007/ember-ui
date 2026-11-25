@@ -3,7 +3,9 @@
         {{#if (has-block)}}
             {{yield}}
         {{else}}
-            {{#if @column.humanize}}
+            {{#if @column.formatValue}}
+                {{or (@column.formatValue @value @row) "-"}}
+            {{else if @column.humanize}}
                 {{smart-humanize (or @value "-")}}
             {{else}}
                 {{or @value "-"}}

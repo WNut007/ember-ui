@@ -68,7 +68,7 @@
                 {{#if item._isShortcut}}
                     {{! ── Shortcut card ───────────────────────────────────── }}
                     <div class="snm-dropdown-card-wrap">
-                        <LinkToExternal @route={{item.route}} id={{concat (dasherize (or item.route item.id "sc")) "-dropdown-card"}} class="snm-dropdown-card" title={{item.title}}>
+                        <LinkToExternal @route={{item.route}} id={{concat (dasherize (or item.route item.id "sc")) "-dropdown-card"}} class="snm-dropdown-card" title={{registry-text item.title}}>
                             <div class="snm-dropdown-card-header">
                                 <span class="snm-dropdown-card-icon">
                                     {{#if item.iconComponent}}
@@ -78,14 +78,14 @@
                                     {{/if}}
                                 </span>
                                 <span class="snm-dropdown-card-title-group">
-                                    <span class="snm-dropdown-card-title">{{item.title}}</span>
+                                    <span class="snm-dropdown-card-title">{{registry-text item.title}}</span>
                                     {{#if item._parentTitle}}
                                         <span class="snm-dropdown-card-parent-label" aria-label="from {{item._parentTitle}}">· {{item._parentTitle}}</span>
                                     {{/if}}
                                 </span>
                             </div>
                             {{#if item.description}}
-                                <p class="snm-dropdown-card-description">{{item.description}}</p>
+                                <p class="snm-dropdown-card-description">{{registry-text item.description}}</p>
                             {{else if item._parentTitle}}
                                 <p class="snm-dropdown-card-description snm-dropdown-card-description--from"><em>{{t
                                             "ember-ui.components.layout.header.smart-nav-menu.dropdown.from"
@@ -98,7 +98,7 @@
                                 type="button"
                                 class="snm-dropdown-pin-btn"
                                 title={{t "ember-ui.components.layout.header.smart-nav-menu.dropdown.pin-to-navigation-bar"}}
-                                aria-label={{t "ember-ui.components.layout.header.smart-nav-menu.dropdown.pin-to-navigation-bar-2" title=item.title}}
+                                aria-label={{t "ember-ui.components.layout.header.smart-nav-menu.dropdown.pin-to-navigation-bar-2" title=(registry-text item.title)}}
                                 {{on "click" (fn (or @onQuickPin (noop)) item)}}
                             >
                                 <FaIcon @icon="thumbtack" @size="xs" />
@@ -109,7 +109,7 @@
                     {{! ── Primary extension card ──────────────────────────── }}
                     <div class="snm-dropdown-card-wrap">
                         {{#if item.onClick}}
-                            <a href="javascript:;" class="snm-dropdown-card" title={{item.title}} {{on "click" (fn this.handleItemClick item)}}>
+                            <a href="javascript:;" class="snm-dropdown-card" title={{registry-text item.title}} {{on "click" (fn this.handleItemClick item)}}>
                                 <div class="snm-dropdown-card-header">
                                     <span class="snm-dropdown-card-icon">
                                         {{#if item.iconComponent}}
@@ -119,18 +119,18 @@
                                         {{/if}}
                                     </span>
                                     <span class="snm-dropdown-card-title-group">
-                                        <span class="snm-dropdown-card-title">{{item.title}}</span>
+                                        <span class="snm-dropdown-card-title">{{registry-text item.title}}</span>
                                         {{#if item._parentTitle}}
                                             <span class="snm-dropdown-card-parent-label" aria-label="from {{item._parentTitle}}">· {{item._parentTitle}}</span>
                                         {{/if}}
                                     </span>
                                 </div>
                                 {{#if item.description}}
-                                    <p class="snm-dropdown-card-description">{{item.description}}</p>
+                                    <p class="snm-dropdown-card-description">{{registry-text item.description}}</p>
                                 {{/if}}
                             </a>
                         {{else}}
-                            <LinkToExternal @route={{item.route}} id={{concat (dasherize (or item.route item.id "nav")) "-dropdown-card"}} class="snm-dropdown-card" title={{item.title}}>
+                            <LinkToExternal @route={{item.route}} id={{concat (dasherize (or item.route item.id "nav")) "-dropdown-card"}} class="snm-dropdown-card" title={{registry-text item.title}}>
                                 <div class="snm-dropdown-card-header">
                                     <span class="snm-dropdown-card-icon">
                                         {{#if item.iconComponent}}
@@ -140,14 +140,14 @@
                                         {{/if}}
                                     </span>
                                     <span class="snm-dropdown-card-title-group">
-                                        <span class="snm-dropdown-card-title">{{item.title}}</span>
+                                        <span class="snm-dropdown-card-title">{{registry-text item.title}}</span>
                                         {{#if item._parentTitle}}
                                             <span class="snm-dropdown-card-parent-label" aria-label="from {{item._parentTitle}}">· {{item._parentTitle}}</span>
                                         {{/if}}
                                     </span>
                                 </div>
                                 {{#if item.description}}
-                                    <p class="snm-dropdown-card-description">{{item.description}}</p>
+                                    <p class="snm-dropdown-card-description">{{registry-text item.description}}</p>
                                 {{/if}}
                             </LinkToExternal>
                         {{/if}}
@@ -156,7 +156,7 @@
                                 type="button"
                                 class="snm-dropdown-pin-btn"
                                 title={{t "ember-ui.components.layout.header.smart-nav-menu.dropdown.pin-to-navigation-bar"}}
-                                aria-label={{t "ember-ui.components.layout.header.smart-nav-menu.dropdown.pin-to-navigation-bar-2" title=item.title}}
+                                aria-label={{t "ember-ui.components.layout.header.smart-nav-menu.dropdown.pin-to-navigation-bar-2" title=(registry-text item.title)}}
                                 {{on "click" (fn (or @onQuickPin (noop)) item)}}
                             >
                                 <FaIcon @icon="thumbtack" @size="xs" />

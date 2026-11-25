@@ -54,7 +54,7 @@
                                 <FaIcon @icon={{or item.icon "circle-dot"}} @prefix={{item.iconPrefix}} @size="sm" />
                             {{/if}}
                         </div>
-                        <span class="snm-customizer-item-title truncate">{{item.title}}</span>
+                        <span class="snm-customizer-item-title truncate">{{registry-text item.title}}</span>
                         {{#if item._parentTitle}}
                             <span class="snm-customizer-item-parent-label">· {{item._parentTitle}}</span>
                         {{/if}}
@@ -109,7 +109,7 @@
                                 <FaIcon @icon={{or item.icon "circle-dot"}} @prefix={{item.iconPrefix}} @size="sm" />
                             {{/if}}
                         </div>
-                        <span class="snm-customizer-item-title truncate">{{item.title}}</span>
+                        <span class="snm-customizer-item-title truncate">{{registry-text item.title}}</span>
                         {{#if item._parentTitle}}
                             <span class="snm-customizer-item-parent-label">· {{item._parentTitle}}</span>
                         {{/if}}
