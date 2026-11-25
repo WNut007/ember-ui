@@ -18,6 +18,9 @@ export default class DashboardComponent extends Component {
     @service fetch;
     @service dashboard;
 
+    /** The built-in dashboard is stored under its English name; show it in the user's language. */
+    dashboardName = (name) => (name === 'Default Dashboard' && this.intl.exists('component.dashboard.default-dashboard') ? this.intl.t('component.dashboard.default-dashboard') : name);
+
     /**
      * Creates an instance of DashboardComponent.
      * @memberof DashboardComponent

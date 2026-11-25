@@ -1,12 +1,12 @@
 <div class="fleetbase-dashboard-grid {{if @stickyHeader 'fleetbase-dashboard-grid--sticky'}}" ...attributes>
     <div class="left-section {{@leftHeaderWrapperClass}}">
-        <h1 class="text-lg font-bold">{{this.dashboard.currentDashboard.name}}</h1>
+        <h1 class="text-lg font-bold">{{this.dashboardName this.dashboard.currentDashboard.name}}</h1>
     </div>
     <div class="fleetbase-dashboard-actions right-section {{@rightHeaderWrapperClass}} flex items-center space-x-2">
         {{yield}}
         {{yield to="actions"}}
         <DropdownButton
-            @text={{if this.dashboard.currentDashboard.name this.dashboard.currentDashboard.name (t "component.dashboard.select-dashboard")}}
+            @text={{if this.dashboard.currentDashboard.name (this.dashboardName this.dashboard.currentDashboard.name) (t "component.dashboard.select-dashboard")}}
             @buttonClass="flex-row-reverse w-48 justify-between"
             @icon="caret-down"
             @iconClass="mr-0i"
@@ -23,7 +23,7 @@
                                 <div class="w-6">
                                     <FaIcon @icon="desktop" />
                                 </div>
-                                <span>{{dashboard.name}}</span>
+                                <span>{{this.dashboardName dashboard.name}}</span>
                             </div>
                             <div>
                                 {{#if (eq this.dashboard.currentDashboard.id dashboard.id)}}
