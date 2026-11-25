@@ -1,4 +1,5 @@
-<Table::Cell class={{@column.cellClassNames}} {{did-insert this.setupComponent}} ...attributes>
+{{! A plain <td>: rendering it through Table::Cell cost a second component for every cell. }}
+<td class={{@column.cellClassNames}} ...attributes {{did-insert this.setupComponent}}>
     {{#if (has-block)}}
         {{yield}}
     {{else}}
@@ -15,4 +16,4 @@
             <Table::Cell::Base @column={{@column}} @row={{@row}} @value={{@value}} />
         {{/if}}
     {{/if}}
-</Table::Cell>
+</td>

@@ -10,7 +10,8 @@
         <Image src={{@image.url}} @fallbackSrc={{or @image.fallback (config "defaultValues.placeholderImage")}} alt="" class="h-5 w-5 rounded-full border border-gray-200 object-cover shadow-sm dark:border-gray-700" data-test-resource-identity-image />
     {{/if}}
     {{#if @hasStatusDot}}
-        <FaIcon @icon="circle" @size="2xs" class="absolute left-0 top-0 -ml-1 -mt-1 {{@statusDotClass}}" data-test-resource-identity-status-dot />
+        {{! A CSS dot the size of the 2xs circle icon: an icon component per identity cell was the costliest part of it. }}
+        <span class="fa-2xs absolute left-0 top-0 -ml-1 -mt-1 inline-block h-[1em] w-[1em] rounded-full bg-current {{@statusDotClass}}" data-test-resource-identity-status-dot></span>
     {{/if}}
 </div>
 <div class="min-w-0 truncate text-sm leading-4 text-gray-900 group-hover:text-blue-600 dark:text-gray-200 dark:group-hover:text-blue-300" data-test-identity-label>{{n-a @label}}</div>
